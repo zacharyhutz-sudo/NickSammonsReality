@@ -62,9 +62,9 @@ import '../styles/global.css';
 		</nav>
 
 		<!-- Fullscreen Navigation Sidebar -->
-		<div id="nav-sidebar" class="fixed inset-0 z-[120] pointer-events-none opacity-0 transition-all duration-500">
-			<div id="nav-overlay" class="absolute inset-0 bg-stone-950/40 backdrop-blur-sm"></div>
-			<div id="nav-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 flex flex-col p-12 lg:p-20">
+		<div id="nav-sidebar" class="fixed inset-0 z-[120] pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out">
+			<div id="nav-overlay" class="absolute inset-0 bg-stone-950/40 backdrop-blur-sm transition-all duration-700 ease-in-out"></div>
+			<div id="nav-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col p-12 lg:p-20">
 				<div class="flex justify-end mb-12 lg:mb-20">
 					<button id="nav-close" class="text-stone-400 hover:text-stone-900 transition-colors p-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
