@@ -12,7 +12,7 @@ import '../styles/global.css';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Nick Sammons Realty - Professional Real Estate Services" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/NickSammonsReality/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -21,14 +21,6 @@ import '../styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden">
-		<!-- SVG Gooey Filter (Realty-Grade Matrix) -->
-		<svg style="visibility: hidden; position: absolute;" width="0" height="0">
-			<filter id="goo">
-				<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-				<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -20" result="goo" />
-				<feComposite in="SourceGraphic" in2="goo" operator="atop" />
-			</filter>
-		</svg>
 
 		<!-- Main Header -->
 		<header id="site-header" class="w-full bg-white relative z-[100] transition-all duration-75">
@@ -47,26 +39,21 @@ import '../styles/global.css';
 						<a href="/NickSammonsReality/contact" class="hover:text-stone-900 transition-colors">Contact</a>
 					</div>
 					
-					<!-- The Mitosis Stage (Tall Wrapper for Filter) -->
-					<div id="goo-wrapper" class="relative w-14 h-14">
-                        <div class="absolute top-0 right-0 w-14 h-[300px] pointer-events-none" style="filter: url('#goo');">
-                            <div id="mitosis-stub" class="absolute top-0 left-0 w-14 h-14 bg-white rounded-full origin-top"></div>
-                            <div id="mitosis-bridge" class="absolute top-7 left-1/2 -translate-x-1/2 w-8 bg-white opacity-0 origin-top" style="will-change: transform, height;"></div>
-                            
-                            <button id="nav-mother" class="nav-toggle absolute top-0 left-0 w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-200 shadow-sm pointer-events-auto flex items-center justify-center transition-transform duration-75" style="will-change: transform;">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                                </svg>
-                            </button>
-                        </div>
+					<!-- Simplified Header Nav Pill -->
+					<div id="header-nav-container" class="relative w-14 h-14">
+                        <button id="nav-trigger" class="nav-toggle relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
 					</div>
 				</div>
 			</div>
 			<div class="absolute bottom-0 left-0 w-full h-px bg-stone-200"></div>
 		</header>
 
-		<nav id="floating-nav" class="fixed z-[110] pointer-events-none opacity-0 transition-all duration-75" style="top: 32px; right: var(--nav-right-offset, 24px);">
-			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
+		<nav id="floating-nav" class="fixed z-[110] pointer-events-none opacity-0 translate-y-4 transition-all duration-500 ease-out" style="top: 32px; right: var(--nav-right-offset, 24px);">
+			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-2xl hover:shadow-stone-900/10 transition-all duration-300 active:scale-95">
 				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -108,20 +95,16 @@ import '../styles/global.css';
 
 		<script>
 			const floatingNav = document.getElementById('floating-nav');
-			const mother = document.getElementById('nav-mother');
-            const bridge = document.getElementById('mitosis-bridge');
-			const stub = document.getElementById('mitosis-stub');
+			const headerTrigger = document.getElementById('nav-trigger');
 			const navSidebar = document.getElementById('nav-sidebar');
 			const navPanel = document.getElementById('nav-panel');
 			const navOverlay = document.getElementById('nav-overlay');
 			const navClose = document.getElementById('nav-close');
 			const toggles = document.querySelectorAll('.nav-toggle');
 
-			let isSnapped = false;
-
 			function syncResponsivePadding() {
-				if (mother && floatingNav) {
-					const rect = mother.getBoundingClientRect();
+				if (headerTrigger && floatingNav) {
+					const rect = headerTrigger.getBoundingClientRect();
 					const exactRightPx = window.innerWidth - rect.right;
 					document.documentElement.style.setProperty('--nav-right-offset', `${exactRightPx}px`);
 					floatingNav.style.right = `${exactRightPx}px`;
@@ -132,76 +115,27 @@ import '../styles/global.css';
 			window.addEventListener('resize', syncResponsivePadding);
 			[100, 500, 1000].forEach(delay => setTimeout(syncResponsivePadding, delay));
 
-			function updateMitosis() {
+			function updateStickyNav() {
 				const scrollY = window.scrollY;
-				const breakDistance = 140;   
+				const threshold = 100;
 
-				if (scrollY > 0 && scrollY < breakDistance) {
-					isSnapped = false;
-                    const tension = scrollY / breakDistance;
-					const lagFactor = 0.85; 
-					const visualY = scrollY * lagFactor;
-					
-					if (mother) {
-						mother.style.opacity = '1';
-						mother.style.transform = `translateY(${visualY}px)`;
-					}
-					if (stub) {
-						stub.style.transform = 'scaleY(1)';
-						stub.style.transition = 'none';
-						stub.style.opacity = '1';
-					}
-                    if (bridge) {
-                        bridge.style.opacity = '1';
-                        bridge.style.height = `${visualY}px`;
-                        bridge.style.width = `${32 * (1 - (tension * 0.5))}px`;
-                    }
+				if (scrollY > threshold) {
 					if (floatingNav) {
-						floatingNav.style.opacity = '0';
-						floatingNav.style.pointerEvents = 'none';
+						floatingNav.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+						floatingNav.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
 					}
-				} else if (scrollY >= breakDistance) {
-					if (!isSnapped) {
-						isSnapped = true;
-						
-                        // SNAP EFFECT
-                        if (bridge) bridge.style.opacity = '0';
-                        if (stub) {
-                            stub.style.transform = 'scaleY(0)';
-                            stub.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        }
-						
-						// Release "Thud" on the pill
-						if (floatingNav) {
-                            floatingNav.style.opacity = '1';
-                            floatingNav.style.pointerEvents = 'auto';
-                            floatingNav.animate([
-                                { transform: 'translateY(12px) scaleY(1.1)' },
-                                { transform: 'translateY(-4px) scaleY(0.95)' },
-                                { transform: 'translateY(0) scaleY(1)' }
-                            ], { duration: 400, easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' });
-                        }
+					if (headerTrigger) {
+						headerTrigger.style.opacity = '0';
+						headerTrigger.style.pointerEvents = 'none';
 					}
-
-					if (mother) mother.style.opacity = '0';
 				} else {
-					isSnapped = false;
-					if (mother) {
-						mother.style.opacity = '1';
-						mother.style.transform = 'translateY(0)';
-					}
-                    if (bridge) {
-                        bridge.style.height = '0';
-                        bridge.style.opacity = '0';
-                    }
-					if (stub) {
-						stub.style.transform = 'scaleY(1)';
-						stub.style.transition = 'none';
-						stub.style.opacity = '1';
-					}
 					if (floatingNav) {
-						floatingNav.style.opacity = '0';
-						floatingNav.style.pointerEvents = 'none';
+						floatingNav.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+						floatingNav.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+					}
+					if (headerTrigger) {
+						headerTrigger.style.opacity = '1';
+						headerTrigger.style.pointerEvents = 'auto';
 					}
 				}
 			}
@@ -210,7 +144,7 @@ import '../styles/global.css';
 			window.addEventListener('scroll', () => {
 				if (!ticking) {
 					window.requestAnimationFrame(() => {
-						updateMitosis();
+						updateStickyNav();
 						ticking = false;
 					});
 					ticking = true;
@@ -270,6 +204,9 @@ import '../styles/global.css';
 	}
 	body {
 		font-family: var(--font-sans);
+        -webkit-text-size-adjust: 100%;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
 	}
 	h1, h2, h3, .font-serif {
 		font-family: var(--font-serif);
@@ -289,14 +226,5 @@ import '../styles/global.css';
 	}
 	.group:hover .group-hover\:animate-teardrop {
 		animation: teardrop 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-	}
-
-	@keyframes snapBack {
-		0% { transform: scaleY(1); opacity: 1; }
-		40% { transform: scaleY(0.4); opacity: 0.8; }
-		100% { transform: scaleY(0); opacity: 0; }
-	}
-	.membrane-snapping {
-		animation: snapBack 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 	}
 </style>
