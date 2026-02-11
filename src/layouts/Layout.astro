@@ -56,7 +56,7 @@ import '../styles/global.css';
 		</header>
 
 		<!-- Floating Navigation Pill -->
-		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-50 pointer-events-none opacity-0 transition-all duration-300">
+		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-50 pointer-events-none opacity-0 transition-all duration-75">
 			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
 				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -71,25 +71,24 @@ import '../styles/global.css';
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
+			const membraneSvg = document.getElementById('mitosis-membrane');
 
-			window.addEventListener('scroll', () => {
+			function updateMitosis() {
 				const scrollY = window.scrollY;
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
 					const stretch = scrollY / breakDistance;
 					
-					// 1. Sync the Mother button to scroll perfectly
-					// The mother button is relative to the header, which is scrolling away.
-					// We use scrollY to keep it pinned to its screen position during the stretch.
+					// 1. Mother button stays perfectly locked to the screen
 					if (mother) {
 						mother.style.opacity = '1';
-						mother.style.transform = `translateY(${scrollY}px) scale(${1 - stretch * 0.05})`;
+						mother.style.transform = `translateY(${scrollY}px)`;
 					}
 
-					// 2. Draw the membrane pulling from the bottom BORDER of the header
+					// 2. Membrane stretches from 0 (header border) to scrollY (button)
 					const startX = 50;
-					const endY = scrollY; // Match the button's translation exactly
+					const endY = scrollY; 
 					const width = 14; 
 					
 					const path = `M ${startX - 40},0 
@@ -102,7 +101,9 @@ import '../styles/global.css';
 					membranePath?.setAttribute('d', path);
 					membranePath?.setAttribute('fill-opacity', '1');
 					
+					// Hide daughter during stretch to prevent ghosting
 					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
+					floatingNav?.classList.remove('opacity-100');
 				} else if (scrollY >= breakDistance) {
 					// Snap!
 					membranePath?.setAttribute('d', '');
@@ -111,6 +112,7 @@ import '../styles/global.css';
 						mother.style.pointerEvents = 'none';
 					}
 					
+					// Show daughter exactly at the break point
 					floatingNav?.classList.remove('opacity-0', 'pointer-events-none');
 					floatingNav?.classList.add('opacity-100');
 				} else {
@@ -119,9 +121,21 @@ import '../styles/global.css';
 					if (mother) {
 						mother.style.opacity = '1';
 						mother.style.pointerEvents = 'auto';
-						mother.style.transform = 'translateY(0) scale(1)';
+						mother.style.transform = 'translateY(0)';
 					}
 					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
+				}
+			}
+
+			// Use requestAnimationFrame for buttery smooth 60fps tracking
+			let ticking = false;
+			window.addEventListener('scroll', () => {
+				if (!ticking) {
+					window.requestAnimationFrame(() => {
+						updateMitosis();
+						ticking = false;
+					});
+					ticking = true;
 				}
 			}, { passive: true });
 		</script>
