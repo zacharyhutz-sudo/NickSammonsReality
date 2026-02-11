@@ -1,23 +1,80 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import '../styles/global.css';
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content="Nick Sammons Realty - Professional Real Estate Services" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/NickSammonsReality/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
-	<body>
+	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans">
+		<nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
+			<div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+				<a href="/NickSammonsReality/" class="text-2xl font-serif font-semibold tracking-tight text-stone-900">
+					NICK SAMMONS <span class="font-light text-stone-500">REALTY</span>
+				</a>
+				<div class="hidden md:flex space-x-10 text-xs font-medium uppercase tracking-[0.2em] text-stone-600">
+					<a href="#listings" class="hover:text-stone-900 transition-colors">Listings</a>
+					<a href="#about" class="hover:text-stone-900 transition-colors">About</a>
+					<a href="#contact" class="hover:text-stone-900 transition-colors">Contact</a>
+				</div>
+				<button class="md:hidden text-stone-900">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>
+		</nav>
 		<slot />
+		<footer class="bg-stone-900 text-stone-400 py-20 px-6 lg:px-12">
+			<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-stone-800 pb-20">
+				<div class="space-y-6">
+					<h3 class="text-xl font-serif text-white tracking-tight">NICK SAMMONS REALTY</h3>
+					<p class="text-sm leading-relaxed max-w-xs">Redefining luxury real estate through simple, modern, and professional service across the region.</p>
+				</div>
+				<div class="space-y-6">
+					<h4 class="text-xs font-bold text-white uppercase tracking-widest">Contact</h4>
+					<p class="text-sm">Commerce, Georgia<br/>nick@sammonsrealty.com<br/>(555) 123-4567</p>
+				</div>
+				<div class="space-y-6">
+					<h4 class="text-xs font-bold text-white uppercase tracking-widest">Follow</h4>
+					<div class="flex space-x-4">
+						<a href="#" class="hover:text-white transition-colors">Instagram</a>
+						<a href="#" class="hover:text-white transition-colors">Facebook</a>
+						<a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+			<div class="max-w-7xl mx-auto pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
+				<p>© 2026 Nick Sammons Realty. All Rights Reserved.</p>
+				<p class="mt-4 md:mt-0">Design by Sam</p>
+			</div>
+		</footer>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--font-serif: 'Cormorant Garamond', serif;
+		--font-sans: 'Montserrat', sans-serif;
+	}
 	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+		font-family: var(--font-sans);
+	}
+	h1, h2, h3, .font-serif {
+		font-family: var(--font-serif);
 	}
 </style>
