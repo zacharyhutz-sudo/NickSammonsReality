@@ -20,7 +20,7 @@ import '../styles/global.css';
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden">
+	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden selection:bg-stone-200">
 
 		<!-- Main Header -->
 		<header id="site-header" class="w-full bg-white relative z-[100] transition-all duration-75">
@@ -207,6 +207,8 @@ import '../styles/global.css';
         -webkit-text-size-adjust: 100%;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
+        /* Force GPU Layer for smoother mobile experience */
+        transform: translateZ(0);
 	}
 	h1, h2, h3, .font-serif {
 		font-family: var(--font-serif);
