@@ -6,13 +6,13 @@ import Layout from '../layouts/Layout.astro';
 	<main class="relative z-0">
 		<!-- Hero Section -->
 		<section class="relative h-[500px] md:h-screen flex items-center justify-center z-0 overflow-hidden">
-			<div class="absolute inset-0 bg-stone-900/30 z-10"></div>
+			<div class="absolute inset-0 bg-navy-900/40 z-10"></div>
 			
-			<div class="absolute inset-0 z-0 bg-stone-900">
+			<div class="absolute inset-0 z-0 bg-navy-900">
 				<img 
 					src="/NickSammonsReality/assets/house-1.jpg" 
 					alt="Luxury Modern Home" 
-					class="w-full h-full object-cover opacity-90"
+					class="w-full h-full object-cover opacity-80"
                     loading="eager"
 				/>
 			</div>
@@ -20,14 +20,19 @@ import Layout from '../layouts/Layout.astro';
 			<div class="relative z-20 text-center px-6">
 				<h1 class="text-5xl md:text-8xl text-white font-serif mb-8 tracking-tight leading-none">
 					Exceptional Properties.<br/>
-					Unmatched <span class="italic text-white/90">Expertise.</span>
+					Unmatched <span class="italic text-white/90 underline decoration-gold-400/40 underline-offset-12">Expertise.</span>
 				</h1>
 				<p class="text-white text-sm md:text-base uppercase tracking-[0.3em] font-medium mb-12 drop-shadow-lg">
 					Nick Sammons — Your North Georgia REALTOR®
 				</p>
-				<a href="#listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition-colors shadow-2xl">
-					View Portfolio
-				</a>
+				<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+					<a href="/NickSammonsReality/listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-gold-400 hover:text-white transition-all shadow-2xl">
+						View Portfolio
+					</a>
+					<a href="/NickSammonsReality/about" class="inline-block px-10 py-5 border border-white/30 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all">
+						Our Story
+					</a>
+				</div>
 			</div>
 			<div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:block animate-bounce">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
@@ -40,10 +45,10 @@ import Layout from '../layouts/Layout.astro';
 		<section id="listings" class="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
 			<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
 				<div class="space-y-4">
-					<span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Selected Properties</span>
+					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Selected Properties</span>
 					<h2 class="text-4xl md:text-6xl font-serif tracking-tight">Recent <span class="italic text-stone-500">Exchanges</span></h2>
 				</div>
-				<a href="#contact" class="text-xs font-bold uppercase tracking-widest border-b border-stone-900 pb-2 hover:text-stone-500 hover:border-stone-500 transition-all">
+				<a href="/NickSammonsReality/contact" class="text-xs font-bold uppercase tracking-widest border-b border-gold-400 pb-2 hover:text-gold-500 hover:border-gold-500 transition-all">
 					Inquire About Listings
 				</a>
 			</div>
@@ -55,12 +60,12 @@ import Layout from '../layouts/Layout.astro';
 						<img 
 							src="/NickSammonsReality/assets/house-2.jpg" 
 							alt="Modern Residence" 
-							class="w-full h-full object-cover"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
 						/>
 					</div>
 					<div class="flex justify-between items-start">
 						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">Contemporary Estate</h3>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">Contemporary Estate</h3>
 							<p class="text-xs text-stone-500 uppercase tracking-widest">Athens, Georgia</p>
 						</div>
 					</div>
@@ -72,12 +77,12 @@ import Layout from '../layouts/Layout.astro';
 						<img 
 							src="/NickSammonsReality/assets/house-3.jpg" 
 							alt="Luxury Estate" 
-							class="w-full h-full object-cover"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
 						/>
 					</div>
 					<div class="flex justify-between items-start">
 						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">North Georgia Retreat</h3>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">North Georgia Retreat</h3>
 							<p class="text-xs text-stone-500 uppercase tracking-widest">Commerce, Georgia</p>
 						</div>
 					</div>
@@ -86,7 +91,7 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 
 		<!-- About / Philosophy -->
-		<section id="about" class="bg-stone-100 py-32 px-6 lg:px-12">
+		<section id="about" class="bg-stone-50 py-32 px-6 lg:px-12">
 			<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 				<div class="relative">
 					<img 
@@ -94,24 +99,24 @@ import Layout from '../layouts/Layout.astro';
 						alt="Nick Sammons" 
 						class="w-full h-[700px] object-cover grayscale shadow-2xl"
 					/>
-					<div class="absolute -bottom-10 -left-10 hidden xl:block w-72 h-48 bg-stone-900 p-10 flex flex-col justify-center">
+					<div class="absolute -bottom-10 -left-10 hidden xl:block w-72 h-48 bg-navy-900 p-10 flex flex-col justify-center border-l-4 border-gold-400">
 						<p class="text-white text-2xl font-serif italic leading-tight">Expertly Guided.</p>
-						<p class="text-stone-500 text-[10px] uppercase tracking-widest mt-4">Nick Sammons</p>
+						<p class="text-gold-500 text-[10px] uppercase tracking-widest mt-4">Nick Sammons</p>
 					</div>
 				</div>
 				<div class="space-y-10">
-					<span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Our Philosophy</span>
+					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Our Philosophy</span>
 					<h2 class="text-4xl md:text-6xl font-serif tracking-tight leading-tight">Simple. Modern.<br/>Always <span class="italic text-stone-500">Professional.</span></h2>
 					<p class="text-stone-600 leading-relaxed text-lg font-light">
 						Nick Sammons Realty was founded on a singular principle: that real estate should be an elevated experience. We strip away the complexity of traditional brokerage to provide a streamlined, high-tech, and high-touch service for buyers and sellers in the modern age.
 					</p>
 					<div class="grid grid-cols-2 gap-12 pt-6">
 						<div>
-							<h4 class="text-xs font-bold uppercase tracking-widest mb-4">Integrity</h4>
+							<h4 class="text-xs font-bold uppercase tracking-widest mb-4 text-navy-900">Integrity</h4>
 							<p class="text-sm text-stone-500">Transparent dealings and honest advice at every stage of the transaction.</p>
 						</div>
 						<div>
-							<h4 class="text-xs font-bold uppercase tracking-widest mb-4">Excellence</h4>
+							<h4 class="text-xs font-bold uppercase tracking-widest mb-4 text-navy-900">Excellence</h4>
 							<p class="text-sm text-stone-500">Obsessive attention to detail in marketing and negotiation strategy.</p>
 						</div>
 					</div>
@@ -125,11 +130,11 @@ import Layout from '../layouts/Layout.astro';
 			<p class="text-stone-500 mb-12 text-lg">Whether you are buying or selling, we are here to provide the modern representation you deserve.</p>
 			<form class="space-y-6 text-left mb-12">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-stone-900 transition-colors" />
-					<input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-stone-900 transition-colors" />
+					<input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
+					<input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
 				</div>
-				<textarea placeholder="MESSAGE" rows="4" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-stone-900 transition-colors"></textarea>
-				<button class="w-full py-6 bg-stone-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors mt-8">
+				<textarea placeholder="MESSAGE" rows="4" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors"></textarea>
+				<button class="w-full py-6 bg-navy-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-colors mt-8 shadow-xl">
 					Send Inquiry
 				</button>
 			</form>

@@ -3,6 +3,13 @@
 @theme {
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Montserrat', sans-serif;
+
+  /* Elegant Professional Palette */
+  --color-gold-400: #d4af37; /* Metallic Gold */
+  --color-gold-500: #c5a028;
+  --color-gold-900: #8c6d1f;
+  
+  --color-navy-900: #1a1f2c; /* Deep Charcoal Navy */
 }
 
 @layer base {
