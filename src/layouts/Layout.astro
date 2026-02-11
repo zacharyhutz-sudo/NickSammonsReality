@@ -40,11 +40,11 @@ import '../styles/global.css';
 					<!-- Mitosis Trigger Container -->
 					<div id="nav-trigger-container" class="relative w-14 h-14">
 						<!-- The Membrane (SVG that stretches) -->
-						<svg id="mitosis-membrane" class="absolute inset-[-20px] w-[calc(100%+40px)] h-[calc(100%+40px)] pointer-events-none z-0 overflow-visible" viewBox="0 0 100 100">
-							<path id="membrane-path" d="M 50 50" fill="#1a1a1a" class="transition-all duration-75"></path>
+						<svg id="mitosis-membrane" class="absolute inset-[-40px] w-[calc(100%+80px)] h-[calc(100%+80px)] pointer-events-none z-0 overflow-visible" viewBox="0 0 100 100">
+							<path id="membrane-path" d="" fill="white" class="transition-all duration-75"></path>
 						</svg>
 
-						<button id="nav-mother" class="relative z-10 flex items-center justify-center w-full h-full bg-stone-900 text-white rounded-full transition-all duration-300">
+						<button id="nav-mother" class="relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 transition-all duration-300 shadow-sm">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 							</svg>
@@ -56,8 +56,8 @@ import '../styles/global.css';
 
 		<!-- The Floating Pill -->
 		<nav id="floating-nav" class="fixed top-8 right-8 z-50 pointer-events-none opacity-0 transition-all duration-300">
-			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-stone-900 text-white rounded-full shadow-2xl transition-all">
-				<div class="absolute inset-0 bg-stone-900 rounded-full group-hover:animate-teardrop -z-10"></div>
+			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
+				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 				</svg>
@@ -90,12 +90,13 @@ import '../styles/global.css';
 					// Update SVG Path for "organic stretch"
 					// We draw a blob that connects the circle to the top of the header
 					const width = 28; // circle radius equivalent in SVG units
-					const topY = -scrollY * 0.5; // pull toward top
+					const topY = -scrollY * 0.8; // pull toward top
 					const path = `M 50,50 
 								  m -${width}, 0 
 								  a ${width},${width} 0 1,0 ${width*2},0 
 								  a ${width},${width} 0 1,0 -${width*2},0 
-								  Q 50,50 50,${topY}`;
+								  C 70,50 60,${topY} 50,${topY}
+								  C 40,${topY} 30,50 50,50`;
 					
 					membranePath?.setAttribute('d', path);
 					membranePath?.setAttribute('fill-opacity', (1 - (scrollY/breakDistance)).toString());
