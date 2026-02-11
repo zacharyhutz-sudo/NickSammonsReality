@@ -121,13 +121,18 @@ import '../styles/global.css';
 					const path = `M ${startX - 40},0 L ${startX - width},0 Q ${startX - width},${endY/2} ${startX},${endY} Q ${startX + width},${endY/2} ${startX + width},0 L ${startX + 40},0 Z`;
 					membranePath?.setAttribute('d', path);
 					membranePath?.setAttribute('fill-opacity', '1');
+					
+					// Force daughter to perfectly overlap mother for zero-gap transition
 					if (floatingNav) {
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'none';
 					}
 				} else if (scrollY >= breakDistance) {
 					membranePath?.setAttribute('d', '');
-					if (mother) mother.style.opacity = '0';
+					if (mother) {
+						mother.style.opacity = '0';
+						mother.style.pointerEvents = 'none';
+					}
 					if (floatingNav) {
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'auto';
@@ -136,6 +141,7 @@ import '../styles/global.css';
 					membranePath?.setAttribute('d', '');
 					if (mother) {
 						mother.style.opacity = '1';
+						mother.style.pointerEvents = 'auto';
 						mother.style.transform = 'translateY(0)';
 					}
 					if (floatingNav) {
@@ -164,8 +170,14 @@ import '../styles/global.css';
 			};
 
 			const closeNav = () => {
-				navSidebar?.classList.add('pointer-events-none', 'opacity-0');
+				navSidebar?.classList.add('opacity-100'); // Keep opacity during slide
 				navPanel?.classList.add('translate-x-full');
+				// Wait for slide animation to finish before hiding container/blur
+				setTimeout(() => {
+					if (navPanel?.classList.contains('translate-x-full')) {
+						navSidebar?.classList.add('pointer-events-none', 'opacity-0');
+					}
+				}, 500);
 			};
 
 			toggles.forEach(btn => btn.addEventListener('click', openNav));
