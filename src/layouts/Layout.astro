@@ -21,8 +21,8 @@ import '../styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden">
-		<!-- Static Header -->
-		<header class="w-full bg-white border-b border-stone-200">
+		<!-- Main Header -->
+		<header class="w-full bg-white border-b border-stone-200 relative z-[60]">
 			<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex justify-between items-center">
 				<a href="/NickSammonsReality/" class="flex items-center gap-4 group">
 					<img src="/NickSammonsReality/assets/agency-logo.png" alt="Agency Logo" class="h-10 w-auto" />
@@ -31,20 +31,29 @@ import '../styles/global.css';
 						NICK SAMMONS <span class="font-light text-stone-500 text-sm uppercase tracking-widest ml-1">Realty</span>
 					</span>
 				</a>
-				<div class="hidden md:flex space-x-10 text-xs font-medium uppercase tracking-[0.2em] text-stone-600">
-					<a href="#listings" class="hover:text-stone-900 transition-colors">Listings</a>
-					<a href="#about" class="hover:text-stone-900 transition-colors">About</a>
-					<a href="#contact" class="hover:text-stone-900 transition-colors">Contact</a>
+				<div class="flex items-center gap-10">
+					<div class="hidden md:flex space-x-10 text-xs font-medium uppercase tracking-[0.2em] text-stone-600">
+						<a href="#listings" class="hover:text-stone-900 transition-colors">Listings</a>
+						<a href="#about" class="hover:text-stone-900 transition-colors">About</a>
+						<a href="#contact" class="hover:text-stone-900 transition-colors">Contact</a>
+					</div>
+					
+					<!-- The "Mother" Cell (Source for Mitosis) -->
+					<div id="nav-trigger-container" class="relative w-14 h-14">
+						<button id="nav-mother" class="flex items-center justify-center w-full h-full bg-stone-100 text-stone-900 rounded-full hover:bg-stone-200 transition-colors">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+							</svg>
+						</button>
+					</div>
 				</div>
 			</div>
 		</header>
 
-		<!-- Floating Navigation Pill -->
-		<nav id="floating-nav" class="fixed top-8 right-8 z-50 pointer-events-none opacity-0 translate-y-[-20px] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]">
+		<!-- The "Daughter" Cell (Sticking Pill) -->
+		<nav id="floating-nav" class="fixed top-8 right-8 z-50 pointer-events-none opacity-0 scale-50 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
 			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-stone-900 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all">
-				<!-- Tear Drop Animation Background -->
 				<div class="absolute inset-0 bg-stone-900 rounded-full group-hover:animate-teardrop -z-10"></div>
-				
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 				</svg>
@@ -55,16 +64,23 @@ import '../styles/global.css';
 
 		<script>
 			const floatingNav = document.getElementById('floating-nav');
-			const header = document.querySelector('header');
+			const mother = document.getElementById('nav-mother');
+			const triggerContainer = document.getElementById('nav-trigger-container');
 
 			window.addEventListener('scroll', () => {
-				const headerHeight = header?.offsetHeight || 100;
-				if (window.scrollY > headerHeight) {
-					floatingNav?.classList.remove('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
-					floatingNav?.classList.add('opacity-100', 'translate-y-0');
+				const rect = triggerContainer?.getBoundingClientRect();
+				const isOffScreen = rect && rect.top < 0;
+
+				if (isOffScreen) {
+					// Daughter cell "matures" and sticks
+					floatingNav?.classList.remove('opacity-0', 'scale-50', 'pointer-events-none');
+					floatingNav?.classList.add('opacity-100', 'scale-100');
+					mother?.classList.add('opacity-0', 'scale-50');
 				} else {
-					floatingNav?.classList.add('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
-					floatingNav?.classList.remove('opacity-100', 'translate-y-0');
+					// Daughter cell "re-merges" into the mother
+					floatingNav?.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+					floatingNav?.classList.remove('opacity-100', 'scale-100');
+					mother?.classList.remove('opacity-0', 'scale-50');
 				}
 			});
 		</script>
