@@ -71,28 +71,26 @@ import '../styles/global.css';
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
-			const triggerContainer = document.getElementById('nav-trigger-container');
 
 			window.addEventListener('scroll', () => {
 				const scrollY = window.scrollY;
-				const stretchThreshold = 100; 
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
 					const stretch = scrollY / breakDistance;
 					
-					// 1. Position the Mother button so it stays visible while "stretching"
+					// 1. Sync the Mother button to scroll perfectly
+					// The mother button is relative to the header, which is scrolling away.
+					// We use scrollY to keep it pinned to its screen position during the stretch.
 					if (mother) {
 						mother.style.opacity = '1';
-						mother.style.transform = `translateY(${scrollY}px) scale(${1 - stretch * 0.1})`;
+						mother.style.transform = `translateY(${scrollY}px) scale(${1 - stretch * 0.05})`;
 					}
 
 					// 2. Draw the membrane pulling from the bottom BORDER of the header
-					// SVG viewBox is 100x100. (50,0) is the center bottom edge of the header.
 					const startX = 50;
-					const startY = 0; 
-					const endY = scrollY * 0.8; // The "tether" follows the button
-					const width = 14; // Width of the bridge at the border
+					const endY = scrollY; // Match the button's translation exactly
+					const width = 14; 
 					
 					const path = `M ${startX - 40},0 
 								  L ${startX - width},0
@@ -102,24 +100,30 @@ import '../styles/global.css';
 								  Z`;
 					
 					membranePath?.setAttribute('d', path);
-					membranePath?.setAttribute('fill-opacity', (1 - (scrollY/breakDistance)).toString());
+					membranePath?.setAttribute('fill-opacity', '1');
 					
 					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
 				} else if (scrollY >= breakDistance) {
+					// Snap!
 					membranePath?.setAttribute('d', '');
-					if (mother) mother.style.opacity = '0';
+					if (mother) {
+						mother.style.opacity = '0';
+						mother.style.pointerEvents = 'none';
+					}
 					
 					floatingNav?.classList.remove('opacity-0', 'pointer-events-none');
 					floatingNav?.classList.add('opacity-100');
 				} else {
+					// Reset
 					membranePath?.setAttribute('d', '');
 					if (mother) {
 						mother.style.opacity = '1';
+						mother.style.pointerEvents = 'auto';
 						mother.style.transform = 'translateY(0) scale(1)';
 					}
 					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
 				}
-			});
+			}, { passive: true });
 		</script>
 		
 		<footer class="bg-stone-900 text-stone-400 py-20 px-6 lg:px-12">
