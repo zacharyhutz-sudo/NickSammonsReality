@@ -99,34 +99,38 @@ import '../styles/global.css';
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
-			const navSidebar = document.getElementById('nav-sidebar');
-			const navPanel = document.getElementById('nav-panel');
-			const navOverlay = document.getElementById('nav-overlay');
-			const navClose = document.getElementById('nav-close');
-			const toggles = document.querySelectorAll('.nav-toggle');
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
-					const stretch = scrollY / breakDistance;
+					// 1. Organic Elastic Lag
+					// Mother button lags slightly behind scroll for "tension"
+					const lagFactor = 0.85; 
+					const visualY = scrollY * lagFactor;
+					
 					if (mother) {
 						mother.style.opacity = '1';
-						mother.style.transform = `translateY(${scrollY}px)`;
+						mother.style.transform = `translateY(${visualY}px)`;
 					}
-					const startX = 50;
-					const endY = scrollY; 
-					const width = 14; 
-					const path = `M ${startX - 40},0 L ${startX - width},0 Q ${startX - width},${endY/2} ${startX},${endY} Q ${startX + width},${endY/2} ${startX + width},0 L ${startX + 40},0 Z`;
-					membranePath?.setAttribute('d', path);
-					membranePath?.setAttribute('fill-opacity', '1');
-					
-					// Force daughter to perfectly overlap mother for zero-gap transition
+
+					// 2. Sync Floating Daughter to the SAME lag
 					if (floatingNav) {
+						// Match the mother's visual position exactly
+						floatingNav.style.transform = `translateY(${visualY - scrollY}px)`;
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'none';
 					}
+
+					// 3. Draw Membrane to the lagged button position
+					const startX = 50;
+					const endY = visualY; 
+					const width = 14; 
+					const path = `M ${startX - 40},0 L ${startX - width},0 Q ${startX - width},${endY/2} ${startX},${endY} Q ${startX + width},${endY/2} ${startX + width},0 L ${startX + 40},0 Z`;
+					
+					membranePath?.setAttribute('d', path);
+					membranePath?.setAttribute('fill-opacity', '1');
 				} else if (scrollY >= breakDistance) {
 					membranePath?.setAttribute('d', '');
 					if (mother) {
@@ -134,6 +138,7 @@ import '../styles/global.css';
 						mother.style.pointerEvents = 'none';
 					}
 					if (floatingNav) {
+						floatingNav.style.transform = 'translateY(0)';
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'auto';
 					}
@@ -141,10 +146,11 @@ import '../styles/global.css';
 					membranePath?.setAttribute('d', '');
 					if (mother) {
 						mother.style.opacity = '1';
-						mother.style.pointerEvents = 'auto';
 						mother.style.transform = 'translateY(0)';
+						mother.style.pointerEvents = 'auto';
 					}
 					if (floatingNav) {
+						floatingNav.style.transform = 'translateY(0)';
 						floatingNav.style.opacity = '0';
 						floatingNav.style.pointerEvents = 'none';
 					}
