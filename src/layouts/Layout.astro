@@ -71,22 +71,19 @@ import '../styles/global.css';
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
-			const membraneSvg = document.getElementById('mitosis-membrane');
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
-					const stretch = scrollY / breakDistance;
-					
-					// 1. Mother button stays perfectly locked to the screen
+					// 1. Sync Mother
 					if (mother) {
 						mother.style.opacity = '1';
 						mother.style.transform = `translateY(${scrollY}px)`;
 					}
 
-					// 2. Membrane stretches from 0 (header border) to scrollY (button)
+					// 2. Sync Membrane
 					const startX = 50;
 					const endY = scrollY; 
 					const width = 14; 
@@ -101,29 +98,29 @@ import '../styles/global.css';
 					membranePath?.setAttribute('d', path);
 					membranePath?.setAttribute('fill-opacity', '1');
 					
-					// Hide daughter during stretch to prevent ghosting
-					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
-					floatingNav?.classList.remove('opacity-100');
-				} else if (scrollY >= breakDistance) {
-					// Snap!
-					membranePath?.setAttribute('d', '');
-					if (mother) {
-						mother.style.opacity = '0';
-						mother.style.pointerEvents = 'none';
+					// 3. Keep floatingNav visible but perfectly overlapped to ensure no flicker
+					if (floatingNav) {
+						floatingNav.style.opacity = '1';
+						floatingNav.style.pointerEvents = 'none';
 					}
+				} else if (scrollY >= breakDistance) {
+					membranePath?.setAttribute('d', '');
+					if (mother) mother.style.opacity = '0';
 					
-					// Show daughter exactly at the break point
-					floatingNav?.classList.remove('opacity-0', 'pointer-events-none');
-					floatingNav?.classList.add('opacity-100');
+					if (floatingNav) {
+						floatingNav.style.opacity = '1';
+						floatingNav.style.pointerEvents = 'auto';
+					}
 				} else {
-					// Reset
 					membranePath?.setAttribute('d', '');
 					if (mother) {
 						mother.style.opacity = '1';
-						mother.style.pointerEvents = 'auto';
 						mother.style.transform = 'translateY(0)';
 					}
-					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
+					if (floatingNav) {
+						floatingNav.style.opacity = '0';
+						floatingNav.style.pointerEvents = 'none';
+					}
 				}
 			}
 
