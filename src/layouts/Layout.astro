@@ -50,7 +50,7 @@ import '../styles/global.css';
 					<!-- Gooey Container for Mitosis -->
 					<div id="goo-container" class="relative w-14 h-14" style="filter: url('#goo');">
 						<!-- Anchor stub that stays in the header -->
-						<div class="absolute inset-0 bg-white rounded-full"></div>
+						<div id="mitosis-stub" class="absolute inset-0 bg-white rounded-full transition-all duration-300 origin-top"></div>
 						
 						<button id="nav-mother" class="nav-toggle relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 shadow-sm transition-transform duration-75">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -107,11 +107,14 @@ import '../styles/global.css';
 		<script>
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
+			const stub = document.getElementById('mitosis-stub');
 			const navSidebar = document.getElementById('nav-sidebar');
 			const navPanel = document.getElementById('nav-panel');
 			const navOverlay = document.getElementById('nav-overlay');
 			const navClose = document.getElementById('nav-close');
 			const toggles = document.querySelectorAll('.nav-toggle');
+
+			let isSnapped = false;
 
 			function syncResponsivePadding() {
 				if (mother && floatingNav) {
@@ -131,6 +134,7 @@ import '../styles/global.css';
 				const breakDistance = 140;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
+					isSnapped = false;
 					const lagFactor = 0.85; 
 					const visualY = scrollY * lagFactor;
 					
@@ -138,20 +142,44 @@ import '../styles/global.css';
 						mother.style.opacity = '1';
 						mother.style.transform = `translateY(${visualY}px)`;
 					}
+					if (stub) {
+						stub.classList.remove('membrane-snapping');
+						stub.style.transform = 'scaleY(1)';
+						stub.style.opacity = '1';
+					}
 					if (floatingNav) {
 						floatingNav.style.opacity = '0';
 						floatingNav.style.pointerEvents = 'none';
 					}
 				} else if (scrollY >= breakDistance) {
+					if (!isSnapped) {
+						isSnapped = true;
+						// Trigger Recoil on the stub
+						stub?.classList.add('membrane-snapping');
+						
+						// Release "Thud" on the pill
+						floatingNav?.animate([
+							{ transform: 'translateY(5px) scaleY(1.1)' },
+							{ transform: 'translateY(-2px) scaleY(0.95)' },
+							{ transform: 'translateY(0) scaleY(1)' }
+						], { duration: 400, easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' });
+					}
+
 					if (mother) mother.style.opacity = '0';
 					if (floatingNav) {
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'auto';
 					}
 				} else {
+					isSnapped = false;
 					if (mother) {
 						mother.style.opacity = '1';
 						mother.style.transform = 'translateY(0)';
+					}
+					if (stub) {
+						stub.classList.remove('membrane-snapping');
+						stub.style.transform = 'scaleY(1)';
+						stub.style.opacity = '1';
 					}
 					if (floatingNav) {
 						floatingNav.style.opacity = '0';
@@ -243,5 +271,14 @@ import '../styles/global.css';
 	}
 	.group:hover .group-hover\:animate-teardrop {
 		animation: teardrop 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	}
+
+	@keyframes snapBack {
+		0% { transform: scaleY(1); opacity: 1; }
+		40% { transform: scaleY(0.4); opacity: 0.8; }
+		100% { transform: scaleY(0); opacity: 0; }
+	}
+	.membrane-snapping {
+		animation: snapBack 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 	}
 </style>
