@@ -7,14 +7,13 @@ import Layout from '../layouts/Layout.astro';
 		<!-- Hero Section -->
 		<section class="relative h-screen min-h-[600px] flex items-center justify-center z-0">
 			<div class="absolute inset-0 bg-stone-900/30 z-10"></div>
-			<div class="absolute inset-0 z-0">
-				<img 
-					src="/NickSammonsReality/assets/house-1.jpg" 
-					alt="Luxury Modern Home" 
-					class="w-full h-full object-cover"
-					loading="eager"
-				/>
+			<!-- STATIC BACKGROUND LAYER -->
+			<div 
+				class="absolute inset-0 z-0 bg-fixed bg-center bg-cover"
+				style="background-image: url('/NickSammonsReality/assets/house-1.jpg');"
+			>
 			</div>
+			
 			<div class="relative z-20 text-center px-6">
 				<h1 class="text-5xl md:text-8xl text-white font-serif mb-8 tracking-tight leading-none">
 					Exceptional Properties.<br/>
@@ -23,7 +22,7 @@ import Layout from '../layouts/Layout.astro';
 				<p class="text-white text-sm md:text-base uppercase tracking-[0.3em] font-medium mb-12 drop-shadow-lg">
 					Nick Sammons — Your North Georgia REALTOR®
 				</p>
-				<a href="#listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition-all shadow-2xl">
+				<a href="#listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition-colors shadow-2xl">
 					View Portfolio
 				</a>
 			</div>
@@ -134,3 +133,16 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 	</main>
 </Layout>
+
+<style>
+    /* 
+       THE FINAL FIX:
+       Modern iOS Safari parallax-growth bug occurs when <img> tags are resized by the browser UI.
+       Using a CSS background-image on a div (non-fixed for mobile) is the standard high-end fix.
+    */
+    @media (max-width: 768px) {
+        div[style*="background-image"] {
+            background-attachment: scroll !important; /* Forces iOS to stop trying to be smart */
+        }
+    }
+</style>
