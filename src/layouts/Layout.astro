@@ -48,13 +48,13 @@ import '../styles/global.css';
 				</div>
 			</div>
 			<div id="header-border" class="absolute bottom-0 left-0 w-full h-px bg-stone-200 overflow-visible">
-				<svg id="mitosis-membrane" class="absolute right-6 lg:right-12 bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[28px]" viewBox="0 0 100 100">
+				<svg id="mitosis-membrane" class="absolute bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[28px]" viewBox="0 0 100 100" style="right: var(--nav-right-offset, 24px);">
 					<path id="membrane-path" d="" fill="white" stroke="#e7e5e4" stroke-width="0.5" class="transition-all duration-75"></path>
 				</svg>
 			</div>
 		</header>
 
-		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-50 pointer-events-none opacity-0 transition-all duration-75">
+		<nav id="floating-nav" class="fixed top-8 z-50 pointer-events-none opacity-0 transition-all duration-75" style="right: var(--nav-right-offset, 24px);">
 			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
 				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -99,6 +99,28 @@ import '../styles/global.css';
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
+			const membraneSvg = document.getElementById('mitosis-membrane');
+
+			function syncResponsivePadding() {
+				if (mother && membraneSvg && floatingNav) {
+					const rect = mother.getBoundingClientRect();
+					const offsetRight = window.innerWidth - rect.right;
+					const centerOffset = rect.width / 2;
+					
+					// Set CSS variables for accurate alignment
+					document.documentElement.style.setProperty('--nav-right-offset', `${offsetRight}px`);
+					
+					// Adjust SVG membrane translation to match the center of the mother button
+					// viewBox is 100 wide, center is 50. 
+					// We need to account for the SVG's own width and its container's positioning.
+					membraneSvg.style.right = `${offsetRight}px`;
+					floatingNav.style.right = `${offsetRight}px`;
+				}
+			}
+
+			window.addEventListener('load', syncResponsivePadding);
+			window.addEventListener('resize', syncResponsivePadding);
+			syncResponsivePadding();
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
