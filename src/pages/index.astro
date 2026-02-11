@@ -6,23 +6,22 @@ import Layout from '../layouts/Layout.astro';
 	<main>
 		<!-- Hero Section -->
 		<section class="relative h-screen flex items-center justify-center overflow-hidden">
-			<div class="absolute inset-0 bg-stone-900/40 z-10"></div>
-			<!-- Using a placeholder luxury home image -->
+			<div class="absolute inset-0 bg-stone-900/30 z-10"></div>
 			<img 
-				src="https://images.unsplash.com/photo-1600585154340-be6199f7d009?q=80&w=2070&auto=format&fit=crop" 
+				src="/NickSammonsReality/assets/house-1.jpg" 
 				alt="Luxury Modern Home" 
 				class="absolute inset-0 w-full h-full object-cover"
 			/>
 			<div class="relative z-20 text-center px-6">
 				<h1 class="text-5xl md:text-8xl text-white font-serif mb-8 tracking-tight leading-none">
 					Exceptional Properties.<br/>
-					Unmatched <span class="italic">Expertise.</span>
+					Unmatched <span class="italic text-white/90">Expertise.</span>
 				</h1>
-				<p class="text-white/90 text-sm md:text-base uppercase tracking-[0.3em] font-light mb-12">
-					Curated Real Estate Solutions for the Discerning Buyer
+				<p class="text-white text-sm md:text-base uppercase tracking-[0.3em] font-medium mb-12 drop-shadow-lg">
+					Nick Sammons — Your North Georgia REALTOR®
 				</p>
-				<a href="#listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition-colors">
-					View Collection
+				<a href="#listings" class="inline-block px-10 py-5 bg-white text-stone-900 text-xs font-bold uppercase tracking-widest hover:bg-stone-100 transition-all active:scale-95 shadow-2xl">
+					View Portfolio
 				</a>
 			</div>
 			<div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:block animate-bounce">
@@ -36,48 +35,46 @@ import Layout from '../layouts/Layout.astro';
 		<section id="listings" class="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
 			<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
 				<div class="space-y-4">
-					<span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Selected Portfolio</span>
-					<h2 class="text-4xl md:text-6xl font-serif tracking-tight">Curated <span class="italic text-stone-500">Listings</span></h2>
+					<span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Selected Properties</span>
+					<h2 class="text-4xl md:text-6xl font-serif tracking-tight">Recent <span class="italic text-stone-500">Exchanges</span></h2>
 				</div>
-				<a href="#" class="text-xs font-bold uppercase tracking-widest border-b border-stone-900 pb-2 hover:text-stone-500 hover:border-stone-500 transition-all">
-					Discover All Properties
+				<a href="#contact" class="text-xs font-bold uppercase tracking-widest border-b border-stone-900 pb-2 hover:text-stone-500 hover:border-stone-500 transition-all">
+					Inquire About Listings
 				</a>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
 				<!-- Property 1 -->
 				<div class="group cursor-pointer">
-					<div class="overflow-hidden aspect-[4/3] mb-8">
+					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
 						<img 
-							src="https://images.unsplash.com/photo-1600607687940-4e524cb35a5a?q=80&w=2070&auto=format&fit=crop" 
+							src="/NickSammonsReality/assets/house-2.jpg" 
 							alt="Modern Residence" 
-							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
 						/>
 					</div>
 					<div class="flex justify-between items-start">
 						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">Oak Ridge Contemporary</h3>
-							<p class="text-xs text-stone-500 uppercase tracking-widest">4 Beds | 3.5 Baths | 3,200 sqft</p>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">Contemporary Estate</h3>
+							<p class="text-xs text-stone-500 uppercase tracking-widest">Athens, Georgia</p>
 						</div>
-						<p class="text-xl font-serif text-stone-900">$1,250,000</p>
 					</div>
 				</div>
 
 				<!-- Property 2 -->
 				<div class="group cursor-pointer">
-					<div class="overflow-hidden aspect-[4/3] mb-8">
+					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
 						<img 
-							src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?q=80&w=2070&auto=format&fit=crop" 
+							src="/NickSammonsReality/assets/house-3.jpg" 
 							alt="Luxury Estate" 
-							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
 						/>
 					</div>
 					<div class="flex justify-between items-start">
 						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">The Glass Pavilion</h3>
-							<p class="text-xs text-stone-500 uppercase tracking-widest">5 Beds | 5 Baths | 4,800 sqft</p>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-stone-500 transition-colors">North Georgia Retreat</h3>
+							<p class="text-xs text-stone-500 uppercase tracking-widest">Commerce, Georgia</p>
 						</div>
-						<p class="text-xl font-serif text-stone-900">$2,400,000</p>
 					</div>
 				</div>
 			</div>
@@ -88,12 +85,13 @@ import Layout from '../layouts/Layout.astro';
 			<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 				<div class="relative">
 					<img 
-						src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1973&auto=format&fit=crop" 
-						alt="Office / Interior" 
-						class="w-full h-[600px] object-cover"
+						src="/NickSammonsReality/assets/nick-headshot.jpg" 
+						alt="Nick Sammons" 
+						class="w-full h-[700px] object-cover grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl"
 					/>
-					<div class="absolute -bottom-10 -right-10 hidden xl:block w-64 h-64 bg-stone-900 p-12 flex items-center justify-center">
-						<p class="text-white text-3xl font-serif italic text-center leading-tight">Founded on Trust.</p>
+					<div class="absolute -bottom-10 -left-10 hidden xl:block w-72 h-48 bg-stone-900 p-10 flex flex-col justify-center">
+						<p class="text-white text-2xl font-serif italic leading-tight">Expertly Guided.</p>
+						<p class="text-stone-500 text-[10px] uppercase tracking-widest mt-4">Nick Sammons</p>
 					</div>
 				</div>
 				<div class="space-y-10">
