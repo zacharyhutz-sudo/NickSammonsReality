@@ -21,7 +21,7 @@ import '../styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
 		<!-- Main Header -->
-		<header class="w-full bg-white border-b border-stone-200 relative z-[60]">
+		<header id="site-header" class="w-full bg-white relative z-[60] transition-all duration-75">
 			<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex justify-between items-center relative">
 				<a href="/NickSammonsReality/" class="flex items-center gap-4 group">
 					<img src="/NickSammonsReality/assets/agency-logo.png" alt="Agency Logo" class="h-10 w-auto" />
@@ -39,11 +39,6 @@ import '../styles/global.css';
 					
 					<!-- Mitosis Trigger Container -->
 					<div id="nav-trigger-container" class="relative w-14 h-14">
-						<!-- The Membrane (SVG that stretches) -->
-						<svg id="mitosis-membrane" class="absolute inset-[-40px] w-[calc(100%+80px)] h-[calc(100%+80px)] pointer-events-none z-0 overflow-visible" viewBox="0 0 100 100">
-							<path id="membrane-path" d="" fill="white" class="transition-all duration-75"></path>
-						</svg>
-
 						<button id="nav-mother" class="relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 transition-all duration-300 shadow-sm">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -51,6 +46,12 @@ import '../styles/global.css';
 						</button>
 					</div>
 				</div>
+			</div>
+			<!-- The Membrane / Cell Wall Border -->
+			<div id="header-border" class="absolute bottom-0 left-0 w-full h-px bg-stone-200 overflow-visible">
+				<svg id="mitosis-membrane" class="absolute right-6 lg:right-12 bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[43px]" viewBox="0 0 100 100">
+					<path id="membrane-path" d="" fill="white" stroke="#e7e5e4" stroke-width="0.5" class="transition-all duration-75"></path>
+				</svg>
 			</div>
 		</header>
 
@@ -74,38 +75,30 @@ import '../styles/global.css';
 
 			window.addEventListener('scroll', () => {
 				const scrollY = window.scrollY;
-				const stretchThreshold = 120; // Distance of scroll to simulate stretch
-				const breakDistance = 180;    // Point of "snapping"
+				const stretchThreshold = 100; 
+				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
-					// Stretch the membrane
-					const stretch = Math.min(scrollY / stretchThreshold, 1.2);
-					const currentPull = Math.min(scrollY, breakDistance);
+					const stretch = scrollY / breakDistance;
 					
-					// Update Mother Button
+					// 1. Position the Mother button so it stays visible while "stretching"
 					if (mother) {
-						mother.style.transform = `translateY(${currentPull * 0.2}px) scale(${1 - stretch * 0.1})`;
+						mother.style.opacity = '1';
+						mother.style.transform = `translateY(${scrollY}px) scale(${1 - stretch * 0.1})`;
 					}
 
-					// Update SVG Path for "organic stretch"
-					// We draw a blob that connects the circle to the top of the header
-					const width = 28; // circle radius equivalent in SVG units
+					// 2. Draw the membrane pulling from the bottom BORDER of the header
+					// SVG viewBox is 100x100. (50,0) is the center bottom edge of the header.
+					const startX = 50;
+					const startY = 0; 
+					const endY = scrollY * 0.8; // The "tether" follows the button
+					const width = 14; // Width of the bridge at the border
 					
-					// The "Connection Point" on the header (stays at the top)
-					const headerX = 50;
-					const headerY = -scrollY * 1.2; // Move up relative to the moving button
-					
-					// Create a "gooey" bridge using a wider base at the header
-					const bridgeWidth = Math.max(width * (1 - (scrollY / breakDistance)), 5);
-					
-					const path = `M 50,50 
-								  m -${width}, 0 
-								  a ${width},${width} 0 1,0 ${width*2},0 
-								  a ${width},${width} 0 1,0 -${width*2},0 
-								  M ${50 - width},50
-								  Q ${50 - width},${headerY/2} ${50 - bridgeWidth},${headerY}
-								  L ${50 + bridgeWidth},${headerY}
-								  Q ${50 + width},${headerY/2} ${50 + width},50
+					const path = `M ${startX - 40},0 
+								  L ${startX - width},0
+								  Q ${startX - width},${endY/2} ${startX},${endY}
+								  Q ${startX + width},${endY/2} ${startX + width},0
+								  L ${startX + 40},0
 								  Z`;
 					
 					membranePath?.setAttribute('d', path);
@@ -113,14 +106,12 @@ import '../styles/global.css';
 					
 					floatingNav?.classList.add('opacity-0', 'pointer-events-none');
 				} else if (scrollY >= breakDistance) {
-					// Snap!
 					membranePath?.setAttribute('d', '');
 					if (mother) mother.style.opacity = '0';
 					
 					floatingNav?.classList.remove('opacity-0', 'pointer-events-none');
 					floatingNav?.classList.add('opacity-100');
 				} else {
-					// Reset
 					membranePath?.setAttribute('d', '');
 					if (mother) {
 						mother.style.opacity = '1';
