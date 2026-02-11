@@ -5,14 +5,16 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Nick Sammons Realty | Professional Modern Real Estate">
 	<main class="relative z-0 overflow-x-hidden">
 		<!-- Hero Section -->
-		<section class="relative h-screen flex items-center justify-center overflow-hidden z-0">
+		<section class="relative h-[100dvh] flex items-center justify-center z-0">
 			<div class="absolute inset-0 bg-stone-900/30 z-10"></div>
-			<img 
-				src="/NickSammonsReality/assets/house-1.jpg" 
-				alt="Luxury Modern Home" 
-				class="absolute inset-0 w-full h-full object-cover"
-				loading="eager"
-			/>
+			<div class="absolute inset-0 z-0">
+				<img 
+					src="/NickSammonsReality/assets/house-1.jpg" 
+					alt="Luxury Modern Home" 
+					class="w-full h-full object-cover"
+					loading="eager"
+				/>
+			</div>
 			<div class="relative z-20 text-center px-6">
 				<h1 class="text-5xl md:text-8xl text-white font-serif mb-8 tracking-tight leading-none">
 					Exceptional Properties.<br/>
