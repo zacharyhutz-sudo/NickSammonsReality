@@ -103,24 +103,31 @@ import '../styles/global.css';
 
 			function syncResponsivePadding() {
 				if (mother && membraneSvg && floatingNav) {
+					// 1. Get exact pixels from the right edge of the screen to the Mother
 					const rect = mother.getBoundingClientRect();
 					const offsetRight = window.innerWidth - rect.right;
-					const centerOffset = rect.width / 2;
 					
-					// Set CSS variables for accurate alignment
-					document.documentElement.style.setProperty('--nav-right-offset', `${offsetRight}px`);
+					// 2. Clear out any previous styles that might conflict
+					floatingNav.style.right = 'auto';
+					membraneSvg.style.right = 'auto';
 					
-					// Adjust SVG membrane translation to match the center of the mother button
-					// viewBox is 100 wide, center is 50. 
-					// We need to account for the SVG's own width and its container's positioning.
-					membraneSvg.style.right = `${offsetRight}px`;
-					floatingNav.style.right = `${offsetRight}px`;
+					// 3. Set pixel-perfect alignment based on Mother's live position
+					// We use left + width calculation to ensure it's exact regardless of 'right' properties
+					const exactRightPx = window.innerWidth - (rect.left + rect.width);
+					
+					document.documentElement.style.setProperty('--nav-right-offset', `${exactRightPx}px`);
+					
+					// Manually set these to bypass any CSS transition/interference during resize
+					floatingNav.style.right = `${exactRightPx}px`;
+					membraneSvg.style.right = `${exactRightPx}px`;
 				}
 			}
 
+			// Ensure sync happens after all images and layouts are finalized
 			window.addEventListener('load', syncResponsivePadding);
 			window.addEventListener('resize', syncResponsivePadding);
-			syncResponsivePadding();
+			setTimeout(syncResponsivePadding, 100);
+			setTimeout(syncResponsivePadding, 1000); // Fail-safe for late layout shifts
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
