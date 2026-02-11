@@ -49,12 +49,11 @@ import '../styles/global.css';
 					
 					<!-- The Mitosis Stage (Tall Wrapper for Filter) -->
 					<div id="goo-wrapper" class="relative w-14 h-14">
-                        <!-- This container handles the filter and has a larger bounding box -->
                         <div class="absolute top-0 right-0 w-14 h-[300px] pointer-events-none" style="filter: url('#goo');">
                             <div id="mitosis-stub" class="absolute top-0 left-0 w-14 h-14 bg-white rounded-full origin-top"></div>
-                            <div id="mitosis-bridge" class="absolute top-7 left-1/2 -translate-x-1/2 w-8 bg-white opacity-0 origin-top"></div>
+                            <div id="mitosis-bridge" class="absolute top-7 left-1/2 -translate-x-1/2 w-8 bg-white opacity-0 origin-top" style="will-change: transform, height;"></div>
                             
-                            <button id="nav-mother" class="nav-toggle absolute top-0 left-0 w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-200 shadow-sm pointer-events-auto flex items-center justify-center transition-transform duration-75">
+                            <button id="nav-mother" class="nav-toggle absolute top-0 left-0 w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-200 shadow-sm pointer-events-auto flex items-center justify-center transition-transform duration-75" style="will-change: transform;">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                 </svg>
@@ -148,14 +147,13 @@ import '../styles/global.css';
 						mother.style.transform = `translateY(${visualY}px)`;
 					}
 					if (stub) {
-						stub.classList.remove('membrane-snapping');
 						stub.style.transform = 'scaleY(1)';
+						stub.style.transition = 'none';
 						stub.style.opacity = '1';
 					}
                     if (bridge) {
                         bridge.style.opacity = '1';
                         bridge.style.height = `${visualY}px`;
-                        // Thining effect: the bridge gets narrower as it stretches
                         bridge.style.width = `${32 * (1 - (tension * 0.5))}px`;
                     }
 					if (floatingNav) {
@@ -165,33 +163,42 @@ import '../styles/global.css';
 				} else if (scrollY >= breakDistance) {
 					if (!isSnapped) {
 						isSnapped = true;
-						stub?.classList.add('membrane-snapping');
-                        if (bridge) bridge.style.opacity = '0';
 						
-						floatingNav?.animate([
-							{ transform: 'translateY(12px) scaleY(1.1)' },
-							{ transform: 'translateY(-4px) scaleY(0.95)' },
-							{ transform: 'translateY(0) scaleY(1)' }
-						], { duration: 400, easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' });
+                        // SNAP EFFECT
+                        if (bridge) bridge.style.opacity = '0';
+                        if (stub) {
+                            stub.style.transform = 'scaleY(0)';
+                            stub.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                        }
+						
+						// Release "Thud" on the pill
+						if (floatingNav) {
+                            floatingNav.style.opacity = '1';
+                            floatingNav.style.pointerEvents = 'auto';
+                            floatingNav.animate([
+                                { transform: 'translateY(12px) scaleY(1.1)' },
+                                { transform: 'translateY(-4px) scaleY(0.95)' },
+                                { transform: 'translateY(0) scaleY(1)' }
+                            ], { duration: 400, easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' });
+                        }
 					}
 
 					if (mother) mother.style.opacity = '0';
-					if (floatingNav) {
-						floatingNav.style.opacity = '1';
-						floatingNav.style.pointerEvents = 'auto';
-					}
 				} else {
 					isSnapped = false;
 					if (mother) {
 						mother.style.opacity = '1';
 						mother.style.transform = 'translateY(0)';
 					}
+                    if (bridge) {
+                        bridge.style.height = '0';
+                        bridge.style.opacity = '0';
+                    }
 					if (stub) {
-						stub.classList.remove('membrane-snapping');
 						stub.style.transform = 'scaleY(1)';
+						stub.style.transition = 'none';
 						stub.style.opacity = '1';
 					}
-                    if (bridge) bridge.style.opacity = '0';
 					if (floatingNav) {
 						floatingNav.style.opacity = '0';
 						floatingNav.style.pointerEvents = 'none';
