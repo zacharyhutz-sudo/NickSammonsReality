@@ -152,18 +152,20 @@ import '../styles/global.css';
 			}, { passive: true });
 
 			const openNav = () => {
+				console.log('Opening sidebar...');
 				navSidebar?.classList.remove('pointer-events-none', 'opacity-0');
 				navSidebar?.classList.add('opacity-100');
 				navPanel?.classList.remove('translate-x-full');
 			};
 
 			const closeNav = () => {
+				console.log('Closing sidebar...');
 				navPanel?.classList.add('translate-x-full');
 				navSidebar?.classList.remove('opacity-100');
 				navSidebar?.classList.add('opacity-0');
 				setTimeout(() => {
 					navSidebar?.classList.add('pointer-events-none');
-				}, 500);
+				}, 700);
 			};
 
 			toggles.forEach(btn => btn.addEventListener('click', openNav));
