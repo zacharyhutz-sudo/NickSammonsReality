@@ -21,7 +21,7 @@ import '../styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
 		<!-- Main Header -->
-		<header id="site-header" class="w-full bg-white relative z-[60] transition-all duration-75">
+		<header id="site-header" class="w-full bg-white relative z-[60] transition-all duration-75 overflow-hidden">
 			<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex justify-between items-center relative">
 				<a href="/NickSammonsReality/" class="flex items-center gap-4 group">
 					<img src="/NickSammonsReality/assets/agency-logo.png" alt="Agency Logo" class="h-10 w-auto" />
@@ -49,14 +49,14 @@ import '../styles/global.css';
 			</div>
 			<!-- The Membrane / Cell Wall Border -->
 			<div id="header-border" class="absolute bottom-0 left-0 w-full h-px bg-stone-200 overflow-visible">
-				<svg id="mitosis-membrane" class="absolute right-6 lg:right-12 bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[43px]" viewBox="0 0 100 100">
+				<svg id="mitosis-membrane" class="absolute right-6 lg:right-12 bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[28px]" viewBox="0 0 100 100">
 					<path id="membrane-path" d="" fill="white" stroke="#e7e5e4" stroke-width="0.5" class="transition-all duration-75"></path>
 				</svg>
 			</div>
 		</header>
 
-		<!-- The Floating Pill -->
-		<nav id="floating-nav" class="fixed top-8 right-8 z-50 pointer-events-none opacity-0 transition-all duration-300">
+		<!-- Floating Navigation Pill -->
+		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-50 pointer-events-none opacity-0 transition-all duration-300">
 			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
 				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
