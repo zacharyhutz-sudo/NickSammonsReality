@@ -100,42 +100,33 @@ import '../styles/global.css';
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
 			const membraneSvg = document.getElementById('mitosis-membrane');
+			const navSidebar = document.getElementById('nav-sidebar');
+			const navPanel = document.getElementById('nav-panel');
+			const navOverlay = document.getElementById('nav-overlay');
+			const navClose = document.getElementById('nav-close');
+			const toggles = document.querySelectorAll('.nav-toggle');
 
 			function syncResponsivePadding() {
 				if (mother && membraneSvg && floatingNav) {
-					// 1. Get exact pixels from the right edge of the screen to the Mother
 					const rect = mother.getBoundingClientRect();
-					const offsetRight = window.innerWidth - rect.right;
-					
-					// 2. Clear out any previous styles that might conflict
-					floatingNav.style.right = 'auto';
-					membraneSvg.style.right = 'auto';
-					
-					// 3. Set pixel-perfect alignment based on Mother's live position
-					// We use left + width calculation to ensure it's exact regardless of 'right' properties
-					const exactRightPx = window.innerWidth - (rect.left + rect.width);
+					const exactRightPx = window.innerWidth - rect.right;
 					
 					document.documentElement.style.setProperty('--nav-right-offset', `${exactRightPx}px`);
 					
-					// Manually set these to bypass any CSS transition/interference during resize
 					floatingNav.style.right = `${exactRightPx}px`;
 					membraneSvg.style.right = `${exactRightPx}px`;
 				}
 			}
 
-			// Ensure sync happens after all images and layouts are finalized
 			window.addEventListener('load', syncResponsivePadding);
 			window.addEventListener('resize', syncResponsivePadding);
-			setTimeout(syncResponsivePadding, 100);
-			setTimeout(syncResponsivePadding, 1000); // Fail-safe for late layout shifts
+			[100, 500, 1000, 2000].forEach(delay => setTimeout(syncResponsivePadding, delay));
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
-					// 1. Organic Elastic Lag
-					// Mother button lags slightly behind scroll for "tension"
 					const lagFactor = 0.85; 
 					const visualY = scrollY * lagFactor;
 					
@@ -144,15 +135,12 @@ import '../styles/global.css';
 						mother.style.transform = `translateY(${visualY}px)`;
 					}
 
-					// 2. Sync Floating Daughter to the SAME lag
 					if (floatingNav) {
-						// Match the mother's visual position exactly
-						floatingNav.style.transform = `translateY(${visualY - scrollY}px)`;
+						floatingNav.style.transform = `translateY(0px)`;
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'none';
 					}
 
-					// 3. Draw Membrane to the lagged button position
 					const startX = 50;
 					const endY = visualY; 
 					const width = 14; 
@@ -197,7 +185,6 @@ import '../styles/global.css';
 				}
 			}, { passive: true });
 
-			// Sidebar Logic
 			const openNav = () => {
 				navSidebar?.classList.remove('pointer-events-none', 'opacity-0');
 				navSidebar?.classList.add('opacity-100');
@@ -208,8 +195,6 @@ import '../styles/global.css';
 				navPanel?.classList.add('translate-x-full');
 				navSidebar?.classList.remove('opacity-100');
 				navSidebar?.classList.add('opacity-0');
-				
-				// Wait for slide animation to finish before removing pointer events
 				setTimeout(() => {
 					navSidebar?.classList.add('pointer-events-none');
 				}, 500);
