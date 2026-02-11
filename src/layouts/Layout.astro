@@ -18,8 +18,9 @@ import '../styles/global.css';
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 	</head>
+	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden">
 		<!-- Main Header -->
 		<header id="site-header" class="w-full bg-white relative z-[60] transition-all duration-75 overflow-hidden">
 			<div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex justify-between items-center relative">
@@ -32,14 +33,13 @@ import '../styles/global.css';
 				</a>
 				<div class="flex items-center gap-10">
 					<div class="hidden md:flex space-x-10 text-xs font-medium uppercase tracking-[0.2em] text-stone-600">
-						<a href="#listings" class="hover:text-stone-900 transition-colors">Listings</a>
-						<a href="#about" class="hover:text-stone-900 transition-colors">About</a>
-						<a href="#contact" class="hover:text-stone-900 transition-colors">Contact</a>
+						<a href="/NickSammonsReality/listings" class="hover:text-stone-900 transition-colors">Listings</a>
+						<a href="/NickSammonsReality/about" class="hover:text-stone-900 transition-colors">About</a>
+						<a href="/NickSammonsReality/contact" class="hover:text-stone-900 transition-colors">Contact</a>
 					</div>
 					
-					<!-- Mitosis Trigger Container -->
 					<div id="nav-trigger-container" class="relative w-14 h-14">
-						<button id="nav-mother" class="relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 transition-all duration-300 shadow-sm">
+						<button id="nav-mother" class="nav-toggle relative z-10 flex items-center justify-center w-full h-full bg-white text-stone-900 rounded-full border border-stone-200 transition-all duration-300 shadow-sm">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 							</svg>
@@ -47,7 +47,6 @@ import '../styles/global.css';
 					</div>
 				</div>
 			</div>
-			<!-- The Membrane / Cell Wall Border -->
 			<div id="header-border" class="absolute bottom-0 left-0 w-full h-px bg-stone-200 overflow-visible">
 				<svg id="mitosis-membrane" class="absolute right-6 lg:right-12 bottom-0 w-[200px] h-[300px] pointer-events-none overflow-visible translate-x-[28px]" viewBox="0 0 100 100">
 					<path id="membrane-path" d="" fill="white" stroke="#e7e5e4" stroke-width="0.5" class="transition-all duration-75"></path>
@@ -55,9 +54,8 @@ import '../styles/global.css';
 			</div>
 		</header>
 
-		<!-- Floating Navigation Pill -->
 		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-50 pointer-events-none opacity-0 transition-all duration-75">
-			<button class="pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
+			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-white text-stone-900 rounded-full border border-stone-100 shadow-xl transition-all">
 				<div class="absolute inset-0 bg-stone-900/5 rounded-full group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -65,40 +63,64 @@ import '../styles/global.css';
 			</button>
 		</nav>
 
+		<!-- Fullscreen Navigation Sidebar -->
+		<div id="nav-sidebar" class="fixed inset-0 z-[100] pointer-events-none opacity-0 transition-all duration-500">
+			<div id="nav-overlay" class="absolute inset-0 bg-stone-950/40 backdrop-blur-sm"></div>
+			<div id="nav-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 flex flex-col p-12 lg:p-20">
+				<div class="flex justify-end mb-12 lg:mb-20">
+					<button id="nav-close" class="text-stone-400 hover:text-stone-900 transition-colors p-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				
+				<div class="flex-1 flex flex-col justify-center space-y-8 lg:space-y-12">
+					<a href="/NickSammonsReality/" class="text-4xl lg:text-6xl font-serif hover:italic transition-all">Home</a>
+					<a href="/NickSammonsReality/about" class="text-4xl lg:text-6xl font-serif hover:italic transition-all">About Nick</a>
+					<a href="/NickSammonsReality/listings" class="text-4xl lg:text-6xl font-serif hover:italic transition-all">Listings</a>
+					<a href="/NickSammonsReality/contact" class="text-4xl lg:text-6xl font-serif hover:italic transition-all">Contact Us</a>
+				</div>
+
+				<div class="pt-12 border-t border-stone-100 mt-auto">
+					<p class="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-4">Get In Touch</p>
+					<a href="mailto:nick@sammonsrealty.com" class="text-sm font-medium hover:text-stone-500">nick@sammonsrealty.com</a>
+					<div class="flex gap-6 mt-8">
+						<a href="#" class="text-xs uppercase tracking-widest hover:text-stone-500">Instagram</a>
+						<a href="#" class="text-xs uppercase tracking-widest hover:text-stone-500">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<slot />
 
 		<script>
 			const floatingNav = document.getElementById('floating-nav');
 			const mother = document.getElementById('nav-mother');
 			const membranePath = document.getElementById('membrane-path');
+			const navSidebar = document.getElementById('nav-sidebar');
+			const navPanel = document.getElementById('nav-panel');
+			const navOverlay = document.getElementById('nav-overlay');
+			const navClose = document.getElementById('nav-close');
+			const toggles = document.querySelectorAll('.nav-toggle');
 
 			function updateMitosis() {
 				const scrollY = window.scrollY;
 				const breakDistance = 160;   
 
 				if (scrollY > 0 && scrollY < breakDistance) {
-					// 1. Sync Mother
+					const stretch = scrollY / breakDistance;
 					if (mother) {
 						mother.style.opacity = '1';
 						mother.style.transform = `translateY(${scrollY}px)`;
 					}
-
-					// 2. Sync Membrane
 					const startX = 50;
 					const endY = scrollY; 
 					const width = 14; 
-					
-					const path = `M ${startX - 40},0 
-								  L ${startX - width},0
-								  Q ${startX - width},${endY/2} ${startX},${endY}
-								  Q ${startX + width},${endY/2} ${startX + width},0
-								  L ${startX + 40},0
-								  Z`;
-					
+					const path = `M ${startX - 40},0 L ${startX - width},0 Q ${startX - width},${endY/2} ${startX},${endY} Q ${startX + width},${endY/2} ${startX + width},0 L ${startX + 40},0 Z`;
 					membranePath?.setAttribute('d', path);
 					membranePath?.setAttribute('fill-opacity', '1');
-					
-					// 3. Keep floatingNav visible but perfectly overlapped to ensure no flicker
 					if (floatingNav) {
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'none';
@@ -106,7 +128,6 @@ import '../styles/global.css';
 				} else if (scrollY >= breakDistance) {
 					membranePath?.setAttribute('d', '');
 					if (mother) mother.style.opacity = '0';
-					
 					if (floatingNav) {
 						floatingNav.style.opacity = '1';
 						floatingNav.style.pointerEvents = 'auto';
@@ -124,7 +145,6 @@ import '../styles/global.css';
 				}
 			}
 
-			// Use requestAnimationFrame for buttery smooth 60fps tracking
 			let ticking = false;
 			window.addEventListener('scroll', () => {
 				if (!ticking) {
@@ -135,30 +155,45 @@ import '../styles/global.css';
 					ticking = true;
 				}
 			}, { passive: true });
+
+			// Sidebar Logic
+			const openNav = () => {
+				navSidebar?.classList.remove('pointer-events-none', 'opacity-0');
+				navSidebar?.classList.add('opacity-100');
+				navPanel?.classList.remove('translate-x-full');
+			};
+
+			const closeNav = () => {
+				navSidebar?.classList.add('pointer-events-none', 'opacity-0');
+				navPanel?.classList.add('translate-x-full');
+			};
+
+			toggles.forEach(btn => btn.addEventListener('click', openNav));
+			navClose?.addEventListener('click', closeNav);
+			navOverlay?.addEventListener('click', closeNav);
 		</script>
 		
 		<footer class="bg-stone-900 text-stone-400 py-20 px-6 lg:px-12">
 			<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-stone-800 pb-20">
 				<div class="space-y-6">
 					<h3 class="text-xl font-serif text-white tracking-tight">NICK SAMMONS REALTY</h3>
-					<p class="text-sm leading-relaxed max-w-xs">Redefining luxury real estate through simple, modern, and professional service across the region.</p>
+					<p class="text-sm leading-relaxed max-w-xs text-stone-500">Professional modern real estate solutions across North Georgia. Built on transparency, discipline, and customer service.</p>
 				</div>
 				<div class="space-y-6">
-					<h4 class="text-xs font-bold text-white uppercase tracking-widest">Contact</h4>
-					<p class="text-sm">Commerce, Georgia<br/>nick@sammonsrealty.com<br/>(555) 123-4567</p>
+					<h4 class="text-xs font-bold text-white uppercase tracking-widest">Connect</h4>
+					<p class="text-sm">Commerce, Georgia<br/>nick@sammonsrealty.com<br/>North Georgia REALTOR®</p>
 				</div>
 				<div class="space-y-6">
 					<h4 class="text-xs font-bold text-white uppercase tracking-widest">Follow</h4>
 					<div class="flex space-x-4">
 						<a href="#" class="hover:text-white transition-colors">Instagram</a>
-						<a href="#" class="hover:text-white transition-colors">Facebook</a>
 						<a href="#" class="hover:text-white transition-colors">LinkedIn</a>
 					</div>
 				</div>
 			</div>
 			<div class="max-w-7xl mx-auto pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
 				<p>© 2026 Nick Sammons Realty. All Rights Reserved.</p>
-				<p class="mt-4 md:mt-0">Design by Sam</p>
+				<p class="mt-4 md:mt-0 text-stone-600">Design by Sam</p>
 			</div>
 		</footer>
 	</body>
