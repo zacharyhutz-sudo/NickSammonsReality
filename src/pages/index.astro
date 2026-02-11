@@ -5,13 +5,17 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Nick Sammons Realty | Professional Modern Real Estate">
 	<main class="relative z-0">
 		<!-- Hero Section -->
-		<section class="relative h-screen min-h-[600px] flex items-center justify-center z-0">
+		<section class="relative h-[100dvh] flex items-center justify-center z-0">
 			<div class="absolute inset-0 bg-stone-900/30 z-10"></div>
-			<!-- STATIC BACKGROUND LAYER -->
-			<div 
-				class="absolute inset-0 z-0 bg-center bg-cover"
-				style="background-image: url('/NickSammonsReality/assets/house-1.jpg'); background-attachment: scroll !important;"
-			>
+			
+			<div class="absolute inset-0 z-0 bg-stone-900">
+				<img 
+					src="/NickSammonsReality/assets/house-1.jpg" 
+					alt="Luxury Modern Home" 
+					class="w-full h-full object-cover opacity-90"
+                    loading="eager"
+                    decoding="sync"
+				/>
 			</div>
 			
 			<div class="relative z-20 text-center px-6">
@@ -133,16 +137,3 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 	</main>
 </Layout>
-
-<style>
-    /* 
-       THE FINAL FIX:
-       Modern iOS Safari parallax-growth bug occurs when <img> tags are resized by the browser UI.
-       Using a CSS background-image on a div (non-fixed for mobile) is the standard high-end fix.
-    */
-    @media (max-width: 768px) {
-        div[style*="background-image"] {
-            background-attachment: scroll !important; /* Forces iOS to stop trying to be smart */
-        }
-    }
-</style>
