@@ -128,13 +128,13 @@ import Layout from '../layouts/Layout.astro';
 		<section id="contact" class="py-32 px-6 lg:px-12 text-center max-w-3xl mx-auto">
 			<h2 class="text-4xl md:text-6xl font-serif mb-10 tracking-tight leading-tight">Ready to Find Your <span class="italic">Place?</span></h2>
 			<p class="text-stone-500 mb-12 text-lg">Whether you are buying or selling, we are here to provide the modern representation you deserve.</p>
-			<form class="space-y-6 text-left mb-12">
+			<form action="https://submit-form.com/fB7dV0UkH" class="space-y-6 text-left mb-12">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
-					<input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
+					<input type="text" name="name" placeholder="FULL NAME" required class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
+					<input type="email" name="email" placeholder="EMAIL ADDRESS" required class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
 				</div>
-				<textarea placeholder="MESSAGE" rows="4" class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors"></textarea>
-				<button class="w-full py-6 bg-navy-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-colors mt-8 shadow-xl">
+				<textarea name="message" placeholder="MESSAGE" rows="4" required class="w-full bg-transparent border-b border-stone-300 py-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors"></textarea>
+				<button type="submit" class="w-full py-6 bg-navy-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-colors mt-8 shadow-xl">
 					Send Inquiry
 				</button>
 			</form>
