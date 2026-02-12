@@ -18,9 +18,9 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 			
 			<div class="relative z-20 text-center px-6">
-				<h1 class="text-4xl md:text-8xl text-white font-serif mb-6 md:mb-8 tracking-tight leading-none">
-					Exceptional Properties.<br/>
-					Unmatched <span class="italic text-white/90 underline decoration-gold-400/40 underline-offset-12">Expertise.</span>
+				<h1 class="text-4xl md:text-8xl text-white font-serif mb-6 md:mb-8 tracking-tight leading-none min-h-[2.5em] md:min-h-[2em]">
+					<span id="hero-typing-1"></span><br/>
+					<span id="hero-typing-2" class="italic text-white/90 underline decoration-gold-400/40 underline-offset-12"></span><span id="hero-cursor" class="border-r-2 border-gold-400 ml-1"></span>
 				</h1>
 				<p class="text-white text-sm md:text-base uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium mb-8 md:mb-12 drop-shadow-lg">
 					Nick Sammons — Your North Georgia REALTOR®
@@ -313,6 +313,42 @@ import Layout from '../layouts/Layout.astro';
 			}, { threshold: 0.5 });
 
 			if (typingText1) typingObserver.observe(typingText1);
+
+			// Hero typing animation
+			const heroTyping1 = document.getElementById('hero-typing-1');
+			const heroTyping2 = document.getElementById('hero-typing-2');
+			const heroCursor = document.getElementById('hero-cursor');
+			const heroLine1 = "Exceptional Properties.";
+			const heroLine2 = "Unmatched Expertise.";
+
+			const typeHero = () => {
+				let i = 0;
+				let j = 0;
+
+				const typeLine2 = () => {
+					if (j < heroLine2.length) {
+						heroTyping2.textContent += heroLine2.charAt(j);
+						j++;
+						setTimeout(typeLine2, 50);
+					} else {
+						heroCursor.style.display = 'none';
+					}
+				};
+
+				const typeLine1 = () => {
+					if (i < heroLine1.length) {
+						heroTyping1.textContent += heroLine1.charAt(i);
+						i++;
+						setTimeout(typeLine1, 50);
+					} else {
+						typeLine2();
+					}
+				};
+
+				typeLine1();
+			};
+
+			window.addEventListener('load', typeHero);
 		</script>
 	</main>
 </Layout>
