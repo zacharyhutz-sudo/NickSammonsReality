@@ -22,13 +22,15 @@ import '../styles/global.css';
 	</head>
 	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden selection:bg-gold-400/30">
 
-		<!-- Sticky Burger Container (Floating Independent of Header) -->
-		<div class="fixed top-8 right-6 lg:right-12 z-[999] pointer-events-none">
-			<button id="sticky-burger" class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-navy-900 text-white shadow-2xl border border-white/10 hover:border-gold-400/50 transition-all duration-300 opacity-0 transform translate-y-4">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-				</svg>
-			</button>
+		<!-- Sticky Container for Nav Burger -->
+		<div class="sticky top-0 z-[999] w-full h-0 overflow-visible pointer-events-none">
+			<div class="flex justify-end px-6 lg:px-12 py-8">
+				<button id="sticky-burger" class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-navy-900 text-white shadow-2xl border border-white/10 hover:border-gold-400/50 transition-opacity duration-300 opacity-0">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>
 		</div>
 
 		<!-- Main Header (Static) -->
@@ -119,11 +121,9 @@ import '../styles/global.css';
 
 				if (scrollY > headerHeight) {
 					stickyBurger.style.opacity = '1';
-					stickyBurger.style.transform = 'translateY(0)';
 					stickyBurger.style.pointerEvents = 'auto';
 				} else {
 					stickyBurger.style.opacity = '0';
-					stickyBurger.style.transform = 'translateY(16px)';
 					stickyBurger.style.pointerEvents = 'none';
 				}
 			}
