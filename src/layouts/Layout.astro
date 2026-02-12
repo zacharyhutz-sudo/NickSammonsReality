@@ -132,12 +132,14 @@ import '../styles/global.css';
 			window.addEventListener('load', handleScroll);
 
 			const openNav = () => {
+				document.body.style.overflow = 'hidden';
 				navSidebar?.classList.remove('pointer-events-none', 'opacity-0');
 				navSidebar?.classList.add('opacity-100');
 				navPanel?.classList.remove('translate-x-full');
 			};
 
 			const closeNav = () => {
+				document.body.style.overflow = '';
 				navPanel?.classList.add('translate-x-full');
 				navSidebar?.classList.remove('opacity-100');
 				navSidebar?.classList.add('opacity-0');
