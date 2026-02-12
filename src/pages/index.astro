@@ -76,11 +76,11 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 
 		<!-- Scrolling Testimonials -->
-		<section class="py-16 md:py-32 bg-stone-100 overflow-hidden">
+		<section id="testimonials-section" class="py-16 md:py-32 bg-stone-100 transition-colors duration-1000 overflow-hidden">
 			<div class="max-w-4xl mx-auto px-6">
 				<div class="text-center mb-16 md:mb-24">
 					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Client Feedback</span>
-					<h2 class="text-4xl md:text-6xl font-serif mt-4">Real <span class="italic text-stone-500">Experiences</span></h2>
+					<h2 id="testimonials-title" class="text-4xl md:text-6xl font-serif mt-4 transition-colors duration-1000">Real <span class="italic text-stone-500">Experiences</span></h2>
 				</div>
 
 				<div class="space-y-12 md:space-y-24">
@@ -245,6 +245,26 @@ import Layout from '../layouts/Layout.astro';
 			document.querySelectorAll('.testimonial-card').forEach(card => {
 				observer.observe(card);
 			});
+
+			// Background transition observer
+			const sectionObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					const section = document.getElementById('testimonials-section');
+					const title = document.getElementById('testimonials-title');
+					if (entry.isIntersecting) {
+						section.classList.remove('bg-stone-100');
+						section.classList.add('bg-navy-900');
+						title.classList.add('text-white');
+					} else {
+						section.classList.add('bg-stone-100');
+						section.classList.remove('bg-navy-900');
+						title.classList.remove('text-white');
+					}
+				});
+			}, { threshold: 0.1 });
+
+			const testimonialSection = document.getElementById('testimonials-section');
+			if (testimonialSection) sectionObserver.observe(testimonialSection);
 		</script>
 	</main>
 </Layout>
