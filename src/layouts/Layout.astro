@@ -69,34 +69,34 @@ import '../styles/global.css';
 		</header>
 
 		<!-- Fullscreen Navigation Sidebar -->
-		<div id="nav-sidebar" class="fixed top-0 left-0 w-full h-full z-[1000] pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out">
-			<div id="nav-overlay" class="absolute inset-0 bg-stone-950/60 transition-all duration-700 ease-in-out"></div>
-			<div id="nav-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col p-12 lg:p-20 border-l border-gold-400/10 pointer-events-auto">
-				<div class="flex justify-end mb-8">
-					<button id="nav-close" class="text-stone-400 hover:text-gold-500 transition-colors p-2">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+		<div id="nav-sidebar" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 99999 !important; pointer-events: none; opacity: 0; transition: opacity 0.7s ease-in-out;">
+			<div id="nav-overlay" style="position: absolute; inset: 0; background: rgba(12, 12, 12, 0.6); transition: all 0.7s ease-in-out;"></div>
+			<div id="nav-panel" style="position: absolute; top: 0; right: 0; width: 100%; max-width: 450px; height: 100vh; background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transform: translateX(100%); transition: transform 0.5s ease-out; display: flex; flex-direction: column; padding: 3rem; border-left: 1px solid rgba(177, 139, 83, 0.1); pointer-events: auto;">
+				<div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+					<button id="nav-close" style="color: #a8a29e; background: none; border: none; cursor: pointer; padding: 0.5rem;">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 2.5rem; height: 2.5rem;">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
 				</div>
 				
-				<div class="flex-1 flex flex-col justify-start space-y-4 lg:space-y-6 overflow-y-auto pr-4">
-					<a href="/NickSammonsReality/" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Home</a>
-					<a href="/NickSammonsReality/listings" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Listings</a>
-					<a href="/NickSammonsReality/search" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Search Homes</a>
-					<a href="/NickSammonsReality/sell" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Sell Your Home</a>
-					<a href="/NickSammonsReality/testimonials" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Testimonials</a>
-					<a href="/NickSammonsReality/about" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">About Nick</a>
-					<a href="/NickSammonsReality/calculator" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Mortgage Calculator</a>
-					<a href="/NickSammonsReality/contact" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Contact Us</a>
+				<div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem; overflow-y: auto;">
+					<a href="/NickSammonsReality/" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Home</a>
+					<a href="/NickSammonsReality/listings" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Listings</a>
+					<a href="/NickSammonsReality/search" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Search Homes</a>
+					<a href="/NickSammonsReality/sell" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Sell Your Home</a>
+					<a href="/NickSammonsReality/testimonials" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Testimonials</a>
+					<a href="/NickSammonsReality/about" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">About Nick</a>
+					<a href="/NickSammonsReality/calculator" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Mortgage Calculator</a>
+					<a href="/NickSammonsReality/contact" style="text-decoration: none; color: #1c1917; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; transition: all 0.3s;">Contact Us</a>
 				</div>
 
-				<div class="pt-8 border-t border-stone-100 mt-auto">
-					<p class="text-[10px] font-bold uppercase tracking-widest text-gold-500 mb-4">Get In Touch</p>
-					<a href="mailto:nick@mccallproperties.com" class="text-sm font-medium text-stone-900 hover:text-gold-500">nick@mccallproperties.com</a>
-					<div class="flex gap-6 mt-8 text-stone-900">
-						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500">Instagram</a>
-						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500">LinkedIn</a>
+				<div style="padding-top: 2rem; border-top: 1px solid #f5f5f4; margin-top: auto;">
+					<p style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B18B53; margin-bottom: 1rem;">Get In Touch</p>
+					<a href="mailto:nick@mccallproperties.com" style="text-decoration: none; color: #1c1917; font-size: 0.875rem;">nick@mccallproperties.com</a>
+					<div style="display: flex; gap: 1.5rem; margin-top: 2rem; color: #1c1917;">
+						<a href="#" style="text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: inherit;">Instagram</a>
+						<a href="#" style="text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: inherit;">LinkedIn</a>
 					</div>
 				</div>
 			</div>
@@ -133,19 +133,26 @@ import '../styles/global.css';
 
 			const openNav = () => {
 				document.body.style.overflow = 'hidden';
-				navSidebar?.classList.remove('pointer-events-none', 'opacity-0');
-				navSidebar?.classList.add('opacity-100');
-				navPanel?.classList.remove('translate-x-full');
+				if (navSidebar) {
+					navSidebar.style.opacity = '1';
+					navSidebar.style.pointerEvents = 'auto';
+				}
+				if (navPanel) {
+					navPanel.style.transform = 'translateX(0)';
+				}
 			};
 
 			const closeNav = () => {
 				document.body.style.overflow = '';
-				navPanel?.classList.add('translate-x-full');
-				navSidebar?.classList.remove('opacity-100');
-				navSidebar?.classList.add('opacity-0');
-				setTimeout(() => {
-					navSidebar?.classList.add('pointer-events-none');
-				}, 700);
+				if (navPanel) {
+					navPanel.style.transform = 'translateX(100%)';
+				}
+				if (navSidebar) {
+					navSidebar.style.opacity = '0';
+					setTimeout(() => {
+						navSidebar.style.pointerEvents = 'none';
+					}, 700);
+				}
 			};
 
 			toggles.forEach(btn => btn.addEventListener('click', openNav));
