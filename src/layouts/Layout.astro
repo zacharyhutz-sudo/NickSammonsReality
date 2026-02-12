@@ -22,7 +22,16 @@ import '../styles/global.css';
 	</head>
 	<body class="bg-[#faf9f6] text-[#1a1a1a] font-sans overflow-x-hidden selection:bg-gold-400/30">
 
-		<!-- Main Header -->
+		<!-- Sticky Burger Container (Floating Independent of Header) -->
+		<div class="fixed top-8 right-6 lg:right-12 z-[999] pointer-events-none">
+			<button id="sticky-burger" class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-navy-900 text-white shadow-2xl border border-white/10 hover:border-gold-400/50 transition-all duration-300 opacity-0 transform translate-y-4">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+				</svg>
+			</button>
+		</div>
+
+		<!-- Main Header (Static) -->
 		<header id="site-header" class="w-full bg-navy-900 relative z-[100]">
 			<div class="w-full px-6 lg:px-12 py-8 flex justify-between items-center relative">
 				<a href="/NickSammonsReality/" class="flex items-center gap-4 group">
@@ -44,6 +53,7 @@ import '../styles/global.css';
 						<a href="/NickSammonsReality/contact" class="hover:text-gold-400 transition-colors">Contact</a>
 					</div>
 					
+					<!-- Static Header Burger Placeholder -->
 					<div class="relative w-14 h-14">
                         <button class="nav-toggle relative z-10 flex items-center justify-center w-full h-full bg-white/5 text-white shadow-sm hover:border-gold-400/50 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -55,15 +65,6 @@ import '../styles/global.css';
 			</div>
 			<div class="absolute bottom-0 left-0 w-full h-px bg-white/5"></div>
 		</header>
-
-		<!-- Floating Sticky Nav Pill -->
-		<nav id="floating-nav" class="fixed top-8 right-6 lg:right-12 z-[999] opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4">
-			<button class="nav-toggle flex items-center justify-center w-14 h-14 bg-navy-900 text-white shadow-2xl border border-white/10 hover:border-gold-400/50 transition-all duration-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-				</svg>
-			</button>
-		</nav>
 
 		<!-- Fullscreen Navigation Sidebar -->
 		<div id="nav-sidebar" class="fixed inset-0 z-[1000] pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out">
@@ -102,7 +103,7 @@ import '../styles/global.css';
 		<slot />
 
 		<script>
-			const floatingNav = document.getElementById('floating-nav');
+			const stickyBurger = document.getElementById('sticky-burger');
 			const siteHeader = document.getElementById('site-header');
 			const navSidebar = document.getElementById('nav-sidebar');
 			const navPanel = document.getElementById('nav-panel');
@@ -110,21 +111,20 @@ import '../styles/global.css';
 			const navClose = document.getElementById('nav-close');
 			const toggles = document.querySelectorAll('.nav-toggle');
 
-			// Simple scroll listener for the floating pill
 			function handleScroll() {
-				if (!floatingNav || !siteHeader) return;
+				if (!stickyBurger || !siteHeader) return;
 				
 				const headerHeight = siteHeader.offsetHeight;
-				const scrollY = window.scrollY || window.pageYOffset;
+				const scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
 				if (scrollY > headerHeight) {
-					floatingNav.style.opacity = '1';
-					floatingNav.style.pointerEvents = 'auto';
-					floatingNav.style.transform = 'translateY(0)';
+					stickyBurger.style.opacity = '1';
+					stickyBurger.style.transform = 'translateY(0)';
+					stickyBurger.style.pointerEvents = 'auto';
 				} else {
-					floatingNav.style.opacity = '0';
-					floatingNav.style.pointerEvents = 'none';
-					floatingNav.style.transform = 'translateY(16px)';
+					stickyBurger.style.opacity = '0';
+					stickyBurger.style.transform = 'translateY(16px)';
+					stickyBurger.style.pointerEvents = 'none';
 				}
 			}
 
