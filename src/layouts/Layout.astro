@@ -56,8 +56,8 @@ import '../styles/global.css';
 			<div class="absolute bottom-0 left-0 w-full h-px bg-white/5"></div>
 		</header>
 
-		<nav id="floating-nav" class="fixed z-[110] pointer-events-none opacity-0 translate-y-4 transition-all duration-500 ease-out" style="top: 32px; right: var(--nav-right-offset, 24px);">
-			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-navy-900 text-white border border-white/10 shadow-2xl hover:border-gold-400/50 transition-all duration-300">
+		<nav id="floating-nav" class="fixed z-[999] opacity-0 pointer-events-none transition-all duration-500 ease-out" style="top: 24px; right: 24px; transform: translateY(20px);">
+			<button class="nav-toggle pointer-events-auto group relative flex items-center justify-center w-14 h-14 bg-navy-900 text-white shadow-2xl border border-white/10 hover:border-gold-400/50 transition-all duration-300">
 				<div class="absolute inset-0 bg-gold-400/5 group-hover:animate-teardrop -z-10"></div>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -124,8 +124,8 @@ import '../styles/global.css';
 			[100, 500, 1000].forEach(delay => setTimeout(syncResponsivePadding, delay));
 
 			function updateStickyNav() {
-				const scrollY = window.scrollY;
-				const threshold = 100;
+				const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+				const threshold = 150;
 
 				if (scrollY > threshold) {
 					if (floatingNav) {
@@ -137,7 +137,7 @@ import '../styles/global.css';
 					if (floatingNav) {
 						floatingNav.style.opacity = '0';
 						floatingNav.style.pointerEvents = 'none';
-						floatingNav.style.transform = 'translateY(1rem)';
+						floatingNav.style.transform = 'translateY(20px)';
 					}
 				}
 			}
