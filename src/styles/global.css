@@ -4,12 +4,13 @@
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Montserrat', sans-serif;
 
-  /* Elegant Professional Palette */
-  --color-gold-400: #d4af37; /* Metallic Gold */
-  --color-gold-500: #c5a028;
-  --color-gold-900: #8c6d1f;
+  /* Chris McCall Branding Palette */
+  --color-gold-400: #B18B53; /* Chris McCall Gold */
+  --color-gold-500: #9e7a46;
+  --color-gold-900: #6b522f;
   
-  --color-navy-900: #1a1f2c; /* Deep Charcoal Navy */
+  --color-navy-900: #0a1128; /* True Navy Blue */
+  --color-navy-950: #020507; /* Midnight Navy */
 }
 
 @layer base {
