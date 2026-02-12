@@ -69,10 +69,10 @@ import '../styles/global.css';
 		</header>
 
 		<!-- Fullscreen Navigation Sidebar -->
-		<div id="nav-sidebar" class="fixed inset-0 z-[1000] pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out">
+		<div id="nav-sidebar" class="fixed top-0 left-0 w-full h-full z-[1000] pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out">
 			<div id="nav-overlay" class="absolute inset-0 bg-stone-950/60 transition-all duration-700 ease-in-out"></div>
-			<div id="nav-panel" class="fixed top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col p-12 lg:p-20 border-l border-gold-400/10">
-				<div class="flex justify-end mb-8 lg:mb-12">
+			<div id="nav-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col p-12 lg:p-20 border-l border-gold-400/10 pointer-events-auto">
+				<div class="flex justify-end mb-8">
 					<button id="nav-close" class="text-stone-400 hover:text-gold-500 transition-colors p-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -81,22 +81,22 @@ import '../styles/global.css';
 				</div>
 				
 				<div class="flex-1 flex flex-col justify-start space-y-4 lg:space-y-6 overflow-y-auto pr-4">
-					<a href="/NickSammonsReality/" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Home</a>
-					<a href="/NickSammonsReality/listings" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Listings</a>
-					<a href="/NickSammonsReality/search" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Search Homes</a>
-					<a href="/NickSammonsReality/sell" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Sell Your Home</a>
-					<a href="/NickSammonsReality/testimonials" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Testimonials</a>
-					<a href="/NickSammonsReality/about" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">About Nick</a>
-					<a href="/NickSammonsReality/calculator" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Mortgage Calculator</a>
-					<a href="/NickSammonsReality/contact" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all pointer-events-auto">Contact Us</a>
+					<a href="/NickSammonsReality/" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Home</a>
+					<a href="/NickSammonsReality/listings" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Listings</a>
+					<a href="/NickSammonsReality/search" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Search Homes</a>
+					<a href="/NickSammonsReality/sell" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Sell Your Home</a>
+					<a href="/NickSammonsReality/testimonials" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Testimonials</a>
+					<a href="/NickSammonsReality/about" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">About Nick</a>
+					<a href="/NickSammonsReality/calculator" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Mortgage Calculator</a>
+					<a href="/NickSammonsReality/contact" class="text-2xl font-serif text-stone-900 hover:text-gold-500 hover:italic transition-all">Contact Us</a>
 				</div>
 
 				<div class="pt-8 border-t border-stone-100 mt-auto">
 					<p class="text-[10px] font-bold uppercase tracking-widest text-gold-500 mb-4">Get In Touch</p>
-					<a href="mailto:nick@mccallproperties.com" class="text-sm font-medium text-stone-900 hover:text-gold-500 pointer-events-auto">nick@mccallproperties.com</a>
+					<a href="mailto:nick@mccallproperties.com" class="text-sm font-medium text-stone-900 hover:text-gold-500">nick@mccallproperties.com</a>
 					<div class="flex gap-6 mt-8 text-stone-900">
-						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500 pointer-events-auto">Instagram</a>
-						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500 pointer-events-auto">LinkedIn</a>
+						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500">Instagram</a>
+						<a href="#" class="text-xs uppercase tracking-widest hover:text-gold-500">LinkedIn</a>
 					</div>
 				</div>
 			</div>
