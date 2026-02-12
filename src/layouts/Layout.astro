@@ -69,7 +69,7 @@ import '../styles/global.css';
 		</header>
 
 		<!-- Fullscreen Navigation Sidebar -->
-		<div id="nav-sidebar" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 99999 !important; pointer-events: none; opacity: 0; transition: opacity 0.7s ease-in-out;">
+		<div id="nav-sidebar" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 99999 !important; pointer-events: none; opacity: 0; transition: opacity 0.7s ease-in-out;">
 			<div id="nav-overlay" style="position: absolute; inset: 0; background: rgba(12, 12, 12, 0.6); transition: all 0.7s ease-in-out;"></div>
 			<div id="nav-panel" style="position: absolute; top: 0; right: 0; width: 100%; max-width: 450px; height: 100vh; background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transform: translateX(100%); transition: transform 0.5s ease-out; display: flex; flex-direction: column; padding: 3rem; border-left: 1px solid rgba(177, 139, 83, 0.1); pointer-events: auto;">
 				<div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
@@ -132,14 +132,16 @@ import '../styles/global.css';
 			window.addEventListener('load', handleScroll);
 
 			const openNav = () => {
-				document.body.style.overflow = 'hidden';
+				const scrollY = window.scrollY || window.pageYOffset;
 				if (navSidebar) {
+					navSidebar.style.top = scrollY + 'px';
 					navSidebar.style.opacity = '1';
 					navSidebar.style.pointerEvents = 'auto';
 				}
 				if (navPanel) {
 					navPanel.style.transform = 'translateX(0)';
 				}
+				document.body.style.overflow = 'hidden';
 			};
 
 			const closeNav = () => {
