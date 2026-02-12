@@ -19,8 +19,8 @@ import Layout from '../layouts/Layout.astro';
 			
 			<div class="relative z-20 text-center px-6">
 				<h1 class="text-4xl md:text-8xl text-white font-serif mb-6 md:mb-8 tracking-tight leading-none min-h-[2.5em] md:min-h-[2em]">
-					<span id="hero-typing-1"></span><br/>
-					<span id="hero-typing-2" class="italic text-white/90 underline decoration-gold-400/40 underline-offset-12"></span><span id="hero-cursor" class="border-r-2 border-gold-400 ml-1"></span>
+					<span id="hero-typing-1"></span><span id="hero-cursor-1" class="border-r-2 border-gold-400 ml-1"></span><br/>
+					<span id="hero-typing-2"></span><span id="hero-typing-3" class="italic text-white/90 underline decoration-gold-400/40 underline-offset-12"></span><span id="hero-cursor-2" class="border-r-2 border-gold-400 ml-1" style="display:none"></span>
 				</h1>
 				<p class="text-white text-sm md:text-base uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium mb-8 md:mb-12 drop-shadow-lg">
 					Nick Sammons — Your North Georgia REALTOR®
@@ -317,13 +317,27 @@ import Layout from '../layouts/Layout.astro';
 			// Hero typing animation
 			const heroTyping1 = document.getElementById('hero-typing-1');
 			const heroTyping2 = document.getElementById('hero-typing-2');
-			const heroCursor = document.getElementById('hero-cursor');
+			const heroTyping3 = document.getElementById('hero-typing-3');
+			const heroCursor1 = document.getElementById('hero-cursor-1');
+			const heroCursor2 = document.getElementById('hero-cursor-2');
 			const heroLine1 = "Exceptional Properties.";
-			const heroLine2 = "Unmatched Expertise.";
+			const heroLine2 = "Unmatched ";
+			const heroLine3 = "Expertise.";
 
 			const typeHero = () => {
 				let i = 0;
 				let j = 0;
+				let k = 0;
+
+				const typeLine3 = () => {
+					if (k < heroLine3.length) {
+						heroTyping3.textContent += heroLine3.charAt(k);
+						k++;
+						setTimeout(typeLine3, 50);
+					} else {
+						heroCursor2.style.display = 'none';
+					}
+				};
 
 				const typeLine2 = () => {
 					if (j < heroLine2.length) {
@@ -331,7 +345,7 @@ import Layout from '../layouts/Layout.astro';
 						j++;
 						setTimeout(typeLine2, 50);
 					} else {
-						heroCursor.style.display = 'none';
+						typeLine3();
 					}
 				};
 
@@ -341,6 +355,8 @@ import Layout from '../layouts/Layout.astro';
 						i++;
 						setTimeout(typeLine1, 50);
 					} else {
+						heroCursor1.style.display = 'none';
+						heroCursor2.style.display = 'inline';
 						typeLine2();
 					}
 				};
