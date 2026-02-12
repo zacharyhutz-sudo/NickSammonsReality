@@ -58,7 +58,8 @@ import Layout from '../layouts/Layout.astro';
 				<div class="space-y-6 md:space-y-10">
 					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Our Philosophy</span>
 					<h2 class="text-3xl md:text-6xl font-serif tracking-tight leading-tight min-h-[2.5em] md:min-h-[2em]">
-						<span id="typing-text" class="border-r-2 border-gold-400 pr-1"></span>
+						<span id="typing-text-1"></span><br/>
+						<span id="typing-text-2" class="italic text-stone-500"></span><span id="cursor" class="border-r-2 border-gold-400 ml-1"></span>
 					</h2>
 					<p class="text-stone-600 leading-relaxed text-base md:text-lg font-light">
 						Nick Sammons Realtor was founded on a singular principle: that real estate should be an elevated experience. We strip away the complexity of traditional brokerage to provide a streamlined, high-tech, and high-touch service for buyers and sellers in the modern age.
@@ -272,8 +273,11 @@ import Layout from '../layouts/Layout.astro';
 			if (testimonialSection) sectionObserver.observe(testimonialSection);
 
 			// Typing animation
-			const typingText = document.getElementById('typing-text');
-			const textToType = "Simple. Modern. Always Professional.";
+			const typingText1 = document.getElementById('typing-text-1');
+			const typingText2 = document.getElementById('typing-text-2');
+			const cursor = document.getElementById('cursor');
+			const line1 = "Simple. Modern.";
+			const line2 = "Always Professional.";
 			let hasTyped = false;
 
 			const typingObserver = new IntersectionObserver((entries) => {
@@ -281,21 +285,34 @@ import Layout from '../layouts/Layout.astro';
 					if (entry.isIntersecting && !hasTyped) {
 						hasTyped = true;
 						let i = 0;
-						const type = () => {
-							if (i < textToType.length) {
-								typingText.textContent += textToType.charAt(i);
-								i++;
-								setTimeout(type, 50);
+						let j = 0;
+						
+						const typeLine2 = () => {
+							if (j < line2.length) {
+								typingText2.textContent += line2.charAt(j);
+								j++;
+								setTimeout(typeLine2, 50);
 							} else {
-								typingText.classList.remove('border-r-2');
+								cursor.style.display = 'none';
 							}
 						};
-						type();
+
+						const typeLine1 = () => {
+							if (i < line1.length) {
+								typingText1.textContent += line1.charAt(i);
+								i++;
+								setTimeout(typeLine1, 50);
+							} else {
+								typeLine2();
+							}
+						};
+						
+						typeLine1();
 					}
 				});
 			}, { threshold: 0.5 });
 
-			if (typingText) typingObserver.observe(typingText);
+			if (typingText1) typingObserver.observe(typingText1);
 		</script>
 	</main>
 </Layout>
