@@ -2,26 +2,43 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Property Search | Nick Sammons Realty">
-	<main class="relative z-0">
-		<section class="py-32 px-6 lg:px-12 max-w-7xl mx-auto text-center space-y-12">
-			<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Find Your Dream Home</span>
-			<h1 class="text-5xl md:text-8xl font-serif tracking-tight leading-none">Discover North <span class="italic text-stone-500">Georgia.</span></h1>
-            
-            <div class="max-w-2xl mx-auto pt-12">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <input type="text" placeholder="City, Zip, or Neighborhood" class="flex-1 bg-white border border-stone-200 px-6 py-4 text-sm outline-none focus:border-gold-400 shadow-sm" />
-                    <button class="px-10 py-4 bg-navy-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-gold-500 transition-all shadow-lg">
-                        Search
-                    </button>
-                </div>
-            </div>
-		</section>
-
-		<section class="py-20 px-6 lg:px-12 bg-stone-50">
-			<div class="max-w-7xl mx-auto text-center">
-                <p class="text-stone-400 italic font-serif text-2xl">Property search engine integration coming soon.</p>
-            </div>
-		</section>
-	</main>
+<Layout title="Search Homes | Nick Sammons Realty">
+  <main class="w-full min-h-screen flex flex-col pt-[120px]">
+    <div class="px-6 lg:px-12 mb-8">
+        <h1 class="text-4xl font-serif italic text-stone-900">Property Search</h1>
+        <p class="text-[10px] font-bold uppercase tracking-widest text-gold-500 mt-2">Powered by Georgia MLS</p>
+    </div>
+    
+    <div class="flex-1 w-full bg-stone-50 border-t border-stone-200 relative">
+      <div id="loading-overlay" class="absolute inset-0 z-10 bg-stone-50 flex items-center justify-center transition-opacity duration-500">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-10 h-10 border-2 border-stone-200 border-t-gold-400 rounded-full animate-spin"></div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400">Loading MLS Data...</p>
+        </div>
+      </div>
+      <iframe 
+        id="idx-iframe"
+        src="https://nicksammons.georgiamls.com/idxsearch/search-action.cfm?gtyp=loc&sid=0&styp=sale&city=&cnty=&zip=&subd=&sch=&br=0&baf=0&lpl=&lph=&sqftl=&sqfth=&acresL=&acresH=&ybl=&ybh=&orderBy=b&dbk=0&scat=1&submit=Search" 
+        class="w-full h-[800px] border-none"
+        onload="document.getElementById('loading-overlay').style.opacity = '0'; setTimeout(() => document.getElementById('loading-overlay').style.display = 'none', 500);"
+      ></iframe>
+    </div>
+  </main>
 </Layout>
+
+<style>
+    /* Ensure the iframe container takes up remaining viewport height */
+    main {
+        min-height: 100vh;
+    }
+    
+    #idx-iframe {
+        min-height: calc(100vh - 200px);
+    }
+
+    @media (max-width: 768px) {
+        #idx-iframe {
+            min-height: calc(100vh - 180px);
+        }
+    }
+</style>
