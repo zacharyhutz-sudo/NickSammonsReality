@@ -48,45 +48,62 @@ import Layout from '../layouts/Layout.astro';
 					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Selected Properties</span>
 					<h2 class="text-4xl md:text-6xl font-serif tracking-tight">Recent <span class="italic text-stone-500">Exchanges</span></h2>
 				</div>
-				<a href="/NickSammonsReality/contact" class="text-xs font-bold uppercase tracking-widest border-b border-gold-400 pb-2 hover:text-gold-500 hover:border-gold-500 transition-all">
-					Inquire About Listings
+				<a href="/NickSammonsReality/listings" class="text-xs font-bold uppercase tracking-widest border-b border-gold-400 pb-2 hover:text-gold-500 hover:border-gold-500 transition-all">
+					View All Listings
 				</a>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-				<!-- Property 1 -->
-				<div class="group cursor-pointer">
-					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
-						<img 
-							src="/NickSammonsReality/assets/88vineyardway_new.jpg" 
-							alt="88 Vineyard Way" 
-							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-						/>
-					</div>
-					<div class="flex justify-between items-start">
-						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">88 Vineyard Way</h3>
-							<p class="text-xs text-stone-500 uppercase tracking-widest">Cleveland, Georgia</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Property 2 -->
-				<div class="group cursor-pointer">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+				<!-- Property 1: 259 Dach Bruecke Gasse -->
+				<a href="/NickSammonsReality/listings#dach-bruecke" class="group block">
 					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
 						<img 
 							src="/NickSammonsReality/assets/house-3.jpg" 
-							alt="Luxury Estate" 
+							alt="259 Dach Bruecke Gasse" 
 							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
 						/>
 					</div>
 					<div class="flex justify-between items-start">
 						<div>
-							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">North Georgia Retreat</h3>
-							<p class="text-xs text-stone-500 uppercase tracking-widest">Commerce, Georgia</p>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">259 Dach Bruecke Gasse</h3>
+							<p class="text-xs text-stone-500 uppercase tracking-widest">Helen, Georgia</p>
 						</div>
 					</div>
-				</div>
+				</a>
+
+				<!-- Property 2: 216 Balaban Circle -->
+				<a href="/NickSammonsReality/listings#balaban-circle" class="group block">
+					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
+						<img 
+							src="/NickSammonsReality/assets/house-1.jpg" 
+							alt="216 Balaban Circle" 
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						/>
+					</div>
+					<div class="flex justify-between items-start">
+						<div>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">216 Balaban Circle</h3>
+							<p class="text-xs text-stone-500 uppercase tracking-widest">Woodstock, Georgia</p>
+						</div>
+					</div>
+				</a>
+
+                <!-- Property 3: 0 Victoria Road -->
+				<a href="/NickSammonsReality/listings#victoria-road" class="group block">
+					<div class="overflow-hidden aspect-[16/10] mb-8 shadow-sm">
+						<img 
+							src="/NickSammonsReality/assets/0-victoria-road.jpg" 
+							alt="0 Victoria Road" 
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						/>
+					</div>
+					<div class="flex justify-between items-start">
+						<div>
+							<h3 class="text-2xl font-serif mb-2 group-hover:text-gold-500 transition-colors">0 Victoria Road</h3>
+							<p class="text-xs text-stone-500 uppercase tracking-widest">Carlton, Georgia</p>
+						</div>
+					</div>
+				</a>
 			</div>
 		</section>
 
