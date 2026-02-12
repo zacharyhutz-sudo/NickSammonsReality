@@ -87,12 +87,12 @@ import Layout from '../layouts/Layout.astro';
           <h2 class="text-2xl font-serif text-stone-400 uppercase tracking-widest italic border-b border-stone-100 pb-4">Past Listings</h2>
           
           <!-- Listing 2: 259 Dach Bruecke Gasse -->
-          <article class="bg-white border border-stone-100 shadow-sm overflow-hidden rounded-sm flex flex-col lg:flex-row opacity-90">
-            <div class="lg:w-1/2 relative overflow-hidden group">
+          <article class="bg-white border border-stone-100 shadow-sm overflow-hidden rounded-sm flex flex-col lg:flex-row opacity-90 group/past">
+            <div class="lg:w-1/2 relative overflow-hidden">
               <img 
                 src="/NickSammonsReality/assets/house-3.jpg" 
                 alt="259 Dach Bruecke Gasse" 
-                class="w-full h-full object-cover transition-transform duration-700 grayscale"
+                class="w-full h-full object-cover transition-all duration-1000 grayscale group-hover/past:grayscale-0 group-active/past:grayscale-0"
               />
               <div class="absolute top-6 left-6 bg-stone-500 text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest">
                 Sold
