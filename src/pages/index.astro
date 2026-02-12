@@ -138,7 +138,7 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 
 				<div class="text-center mt-20">
-					<a href="/NickSammonsReality/testimonials" class="text-xs font-bold uppercase tracking-widest border-b border-gold-400 pb-2 hover:text-gold-500 hover:border-gold-500 transition-all">
+					<a href="/NickSammonsReality/testimonials" id="all-reviews-link" class="text-xs font-bold uppercase tracking-widest border-b border-gold-400 pb-2 hover:text-gold-500 hover:border-gold-500 transition-colors duration-1000">
 						Read All Reviews
 					</a>
 				</div>
@@ -251,14 +251,17 @@ import Layout from '../layouts/Layout.astro';
 				entries.forEach(entry => {
 					const section = document.getElementById('testimonials-section');
 					const title = document.getElementById('testimonials-title');
+					const link = document.getElementById('all-reviews-link');
 					if (entry.isIntersecting) {
 						section.classList.remove('bg-stone-100');
 						section.classList.add('bg-navy-900');
 						title.classList.add('text-white');
+						link.classList.add('text-white');
 					} else {
 						section.classList.add('bg-stone-100');
 						section.classList.remove('bg-navy-900');
 						title.classList.remove('text-white');
+						link.classList.remove('text-white');
 					}
 				});
 			}, { threshold: 0.1 });
