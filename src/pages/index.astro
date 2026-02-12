@@ -57,7 +57,9 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 				<div class="space-y-6 md:space-y-10">
 					<span class="text-xs font-bold text-gold-500 uppercase tracking-widest">Our Philosophy</span>
-					<h2 class="text-3xl md:text-6xl font-serif tracking-tight leading-tight">Simple. Modern.<br/>Always <span class="italic text-stone-500">Professional.</span></h2>
+					<h2 class="text-3xl md:text-6xl font-serif tracking-tight leading-tight min-h-[2.5em] md:min-h-[2em]">
+						<span id="typing-text" class="border-r-2 border-gold-400 pr-1"></span>
+					</h2>
 					<p class="text-stone-600 leading-relaxed text-base md:text-lg font-light">
 						Nick Sammons Realtor was founded on a singular principle: that real estate should be an elevated experience. We strip away the complexity of traditional brokerage to provide a streamlined, high-tech, and high-touch service for buyers and sellers in the modern age.
 					</p>
@@ -268,6 +270,32 @@ import Layout from '../layouts/Layout.astro';
 
 			const testimonialSection = document.getElementById('testimonials-section');
 			if (testimonialSection) sectionObserver.observe(testimonialSection);
+
+			// Typing animation
+			const typingText = document.getElementById('typing-text');
+			const textToType = "Simple. Modern. Always Professional.";
+			let hasTyped = false;
+
+			const typingObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && !hasTyped) {
+						hasTyped = true;
+						let i = 0;
+						const type = () => {
+							if (i < textToType.length) {
+								typingText.textContent += textToType.charAt(i);
+								i++;
+								setTimeout(type, 50);
+							} else {
+								typingText.classList.remove('border-r-2');
+							}
+						};
+						type();
+					}
+				});
+			}, { threshold: 0.5 });
+
+			if (typingText) typingObserver.observe(typingText);
 		</script>
 	</main>
 </Layout>
