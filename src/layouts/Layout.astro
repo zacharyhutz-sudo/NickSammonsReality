@@ -223,28 +223,30 @@ import '../styles/global.css';
 					All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
 				</p>
 				<div class="flex items-center gap-16">
-					<!-- REALTOR® Logo -->
-					<div class="flex flex-col items-center gap-3">
-						<div class="w-12 h-12 bg-white flex items-center justify-center p-1.5 shadow-lg">
-							<svg viewBox="0 0 100 100" class="w-full h-full text-navy-950" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								<path d="M15 15h70v70H15V15zm10 10v50h50V25H25z" opacity="0.1"/>
-								<path d="M35 25h20c10 0 15 5 15 12s-5 12-15 12H48v16h18v5H35V25zm13 18h7c6 0 9-3 9-7s-3-7-9-7h-7v14z"/>
-							</svg>
-						</div>
-						<span class="text-[10px] font-bold tracking-[0.25em] text-white">REALTOR®</span>
+					<!-- REALTOR® Logo (White) -->
+					<div class="flex flex-col items-center gap-2">
+						<svg viewBox="0 0 100 115" class="w-14 h-auto text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<!-- The Block R -->
+							<path d="M5 0h90v90H5V0zm10 10v70h70V10H15z"/>
+							<path d="M43 20h15c8 0 13 4 13 10s-5 10-13 10h-6v15h19v5H43V20zm9 15h6c5 0 8-2 8-5s-3-5-8-5h-6v10z"/>
+							<path d="M68 55l14 25h-6L62 55h6z"/>
+							<!-- REALTOR® Text -->
+							<text x="50" y="110" font-family="Arial, sans-serif" font-weight="900" font-size="16" text-anchor="middle" letter-spacing="0.5">REALTOR®</text>
+						</svg>
 					</div>
 
-					<!-- Equal Housing Opportunity Logo -->
-					<div class="flex flex-col items-center gap-3">
-						<svg viewBox="0 0 100 100" class="w-12 h-12 text-white" fill="none" stroke="currentColor" stroke-width="5" xmlns="http://www.w3.org/2000/svg">
-							<path d="M10 45l40-30 40 30v40H10V45z"/>
-							<rect x="30" y="55" width="40" height="20" fill="currentColor" stroke="none"/>
-							<path d="M30 55h40v20H30z"/>
+					<!-- Equal Housing Opportunity Logo (White) -->
+					<div class="flex flex-col items-center gap-2">
+						<svg viewBox="0 0 100 115" class="w-14 h-auto text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<!-- House Frame -->
+							<path d="M0 45 L50 5 L100 45 L100 90 L0 90 Z M13 48 L50 18 L87 48 L87 80 L13 80 Z"/>
+							<!-- Equal Bars -->
+							<rect x="30" y="48" width="40" height="12"/>
+							<rect x="30" y="64" width="40" height="12"/>
+							<!-- Text Below -->
+							<text x="50" y="102" font-family="Arial, sans-serif" font-weight="900" font-size="9" text-anchor="middle">EQUAL HOUSING</text>
+							<text x="50" y="112" font-family="Arial, sans-serif" font-weight="900" font-size="9" text-anchor="middle">OPPORTUNITY</text>
 						</svg>
-						<div class="flex flex-col text-[8px] font-bold tracking-[0.15em] text-white leading-tight">
-							<span>EQUAL HOUSING</span>
-							<span>OPPORTUNITY</span>
-						</div>
 					</div>
 				</div>
 			</div>
