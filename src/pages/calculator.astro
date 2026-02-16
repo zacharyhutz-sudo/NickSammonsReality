@@ -80,36 +80,56 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
-        <!-- Results -->
+        <!-- Results / Form -->
         <div class="bg-stone-950 text-white p-10 flex flex-col justify-center rounded-sm relative overflow-hidden">
           <div class="absolute top-0 right-0 w-32 h-32 bg-gold-400/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
           
           <div class="relative z-10">
-            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400 mb-2">Estimated Monthly Payment</h3>
-            <div class="text-4xl md:text-6xl font-serif text-white mb-6 md:mb-8" id="monthlyPayment">$0</div>
-            
-            <div class="space-y-4 pt-8 border-t border-white/10">
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-stone-400 uppercase tracking-widest">Principal & Interest</span>
-                <span class="text-sm font-medium" id="resPrincipal">$0</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-stone-400 uppercase tracking-widest">Property Taxes</span>
-                <span class="text-sm font-medium" id="resTaxes">$0</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-stone-400 uppercase tracking-widest">Home Insurance</span>
-                <span class="text-sm font-medium" id="resInsurance">$0</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-stone-400 uppercase tracking-widest">HOA Dues</span>
-                <span class="text-sm font-medium" id="resHoa">$0</span>
-              </div>
+            <!-- Gated State (Form) -->
+            <div id="calculator-gate" class="space-y-6">
+                <div class="text-center mb-8">
+                    <h3 class="text-lg font-serif italic text-gold-400 mb-2">View Your Calculation</h3>
+                    <p class="text-[10px] uppercase tracking-widest text-stone-400">Please provide your info to see the full breakdown</p>
+                </div>
+                
+                <form id="gate-form" class="space-y-4">
+                    <input type="text" id="gate-name" placeholder="FULL NAME" required class="w-full bg-white/5 border-b border-white/20 p-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
+                    <input type="email" id="gate-email" placeholder="EMAIL ADDRESS" required class="w-full bg-white/5 border-b border-white/20 p-4 text-xs tracking-widest outline-none focus:border-gold-400 transition-colors" />
+                    <button type="submit" class="w-full py-5 bg-gold-400 hover:bg-gold-500 text-stone-950 text-[10px] font-bold uppercase tracking-widest transition-colors shadow-xl mt-4">
+                        Calculate Payment
+                    </button>
+                </form>
+                <p class="text-[9px] text-stone-500 text-center uppercase tracking-widest">Your calculation will be sent to your inbox</p>
             </div>
 
-            <div class="mt-12">
-              <a href="/NickSammonsReality/contact" class="block w-full py-4 bg-gold-400 hover:bg-gold-500 text-stone-950 text-center text-[10px] font-bold uppercase tracking-widest transition-colors rounded-sm">Get Pre-Approved</a>
-              <button id="resetBtn" class="block w-full mt-4 text-[10px] uppercase tracking-widest text-stone-500 hover:text-white transition-colors">Reset Calculator</button>
+            <!-- Calculation Results (Hidden by default) -->
+            <div id="calculator-results" class="hidden">
+                <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400 mb-2">Estimated Monthly Payment</h3>
+                <div class="text-4xl md:text-6xl font-serif text-white mb-6 md:mb-8" id="monthlyPayment">$0</div>
+                
+                <div class="space-y-4 pt-8 border-t border-white/10">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-stone-400 uppercase tracking-widest">Principal & Interest</span>
+                    <span class="text-sm font-medium" id="resPrincipal">$0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-stone-400 uppercase tracking-widest">Property Taxes</span>
+                    <span class="text-sm font-medium" id="resTaxes">$0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-stone-400 uppercase tracking-widest">Home Insurance</span>
+                    <span class="text-sm font-medium" id="resInsurance">$0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xs text-stone-400 uppercase tracking-widest">HOA Dues</span>
+                    <span class="text-sm font-medium" id="resHoa">$0</span>
+                </div>
+                </div>
+
+                <div class="mt-12">
+                <a href="/NickSammonsReality/contact" class="block w-full py-4 bg-gold-400 hover:bg-gold-500 text-stone-950 text-center text-[10px] font-bold uppercase tracking-widest transition-colors rounded-sm">Get Pre-Approved</a>
+                <button id="resetBtn" class="block w-full mt-4 text-[10px] uppercase tracking-widest text-stone-500 hover:text-white transition-colors">Start New Calculation</button>
+                </div>
             </div>
           </div>
         </div>
@@ -123,11 +143,15 @@ import Layout from '../layouts/Layout.astro';
       'interestRate', 'loanTerm', 'propertyTax', 'insurance', 'hoa'
     ];
 
+    let calculationData = {};
+
     function calculate() {
       const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
       const downPayment = parseFloat(document.getElementById('downPaymentAmount').value) || 0;
-      const interestRate = (parseFloat(document.getElementById('interestRate').value) || 0) / 100 / 12;
-      const loanTerm = (parseFloat(document.getElementById('loanTerm').value) || 0) * 12;
+      const interestRateRaw = parseFloat(document.getElementById('interestRate').value) || 0;
+      const interestRate = interestRateRaw / 100 / 12;
+      const loanTermYears = parseFloat(document.getElementById('loanTerm').value) || 0;
+      const loanTerm = loanTermYears * 12;
       const annualTax = parseFloat(document.getElementById('propertyTax').value) || 0;
       const annualInsurance = parseFloat(document.getElementById('insurance').value) || 0;
       const monthlyHoa = parseFloat(document.getElementById('hoa').value) || 0;
@@ -136,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
       
       let monthlyPI = 0;
       if (interestRate === 0) {
-        monthlyPI = loanAmount / loanTerm;
+        monthlyPI = loanAmount / (loanTerm || 1);
       } else {
         monthlyPI = loanAmount * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
       }
@@ -145,8 +169,22 @@ import Layout from '../layouts/Layout.astro';
       const monthlyInsurance = annualInsurance / 12;
       const totalMonthly = monthlyPI + monthlyTax + monthlyInsurance + monthlyHoa;
 
-      document.getElementById('monthlyPayment').textContent = '$' + Math.round(totalMonthly).toLocaleString();
-      document.getElementById('resPrincipal').textContent = '$' + Math.round(monthlyPI).toLocaleString();
+      // Store data for submission
+      calculationData = {
+        homePrice: '$' + homePrice.toLocaleString(),
+        downPayment: '$' + downPayment.toLocaleString(),
+        interestRate: interestRateRaw + '%',
+        term: loanTermYears + ' Years',
+        monthlyPI: '$' + Math.round(monthlyPI).toLocaleString(),
+        monthlyTax: '$' + Math.round(monthlyTax).toLocaleString(),
+        monthlyInsurance: '$' + Math.round(monthlyInsurance).toLocaleString(),
+        monthlyHoa: '$' + Math.round(monthlyHoa).toLocaleString(),
+        totalMonthly: '$' + Math.round(totalMonthly).toLocaleString()
+      };
+
+      document.getElementById('monthlyPayment').textContent = calculationData.totalMonthly;
+      document.getElementById('resPrincipal').textContent = calculationData.monthlyPI;
+      document.getElementById('resTaxes').textContent = calculationData.monthlyTaxes; // Note: using direct values for display
       document.getElementById('resTaxes').textContent = '$' + Math.round(monthlyTax).toLocaleString();
       document.getElementById('resInsurance').textContent = '$' + Math.round(monthlyInsurance).toLocaleString();
       document.getElementById('resHoa').textContent = '$' + Math.round(monthlyHoa).toLocaleString();
@@ -183,7 +221,46 @@ import Layout from '../layouts/Layout.astro';
       }
     });
 
+    // Form Handling
+    const gateForm = document.getElementById('gate-form');
+    const calcGate = document.getElementById('calculator-gate');
+    const calcResults = document.getElementById('calculator-results');
+
+    gateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('gate-name').value;
+        const email = document.getElementById('gate-email').value;
+
+        // Visual change immediately
+        calcGate.classList.add('hidden');
+        calcResults.classList.remove('hidden');
+
+        // Submit to Formspark
+        try {
+            await fetch("https://submit-form.com/fB7dV0UkH", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    subject: "New Mortgage Calculation - Nick Sammons Realtor",
+                    ...calculationData
+                }),
+            });
+        } catch (error) {
+            console.error("Formspark submission failed", error);
+        }
+    });
+
     document.getElementById('resetBtn').addEventListener('click', () => {
+      calcResults.classList.add('hidden');
+      calcGate.classList.remove('hidden');
+      
+      // Reset values to defaults
       document.getElementById('homePrice').value = 450000;
       document.getElementById('downPaymentAmount').value = 90000;
       document.getElementById('downPaymentPercent').value = 20;
@@ -192,6 +269,8 @@ import Layout from '../layouts/Layout.astro';
       document.getElementById('propertyTax').value = 5400;
       document.getElementById('insurance').value = 1200;
       document.getElementById('hoa').value = 0;
+      document.getElementById('gate-name').value = '';
+      document.getElementById('gate-email').value = '';
       calculate();
     });
 
