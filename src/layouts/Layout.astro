@@ -174,6 +174,38 @@ import '../styles/global.css';
 			toggles.forEach(btn => btn.addEventListener('click', openNav));
 			navClose?.addEventListener('click', closeNav);
 			navOverlay?.addEventListener('click', closeNav);
+
+			// Scroll Reveal Observer
+			const revealObserverOptions = {
+				threshold: 0.15,
+				rootMargin: '0px 0px -50px 0px'
+			};
+
+			const revealObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('active');
+						// Only unobserve if it's not the home page testimonials which have their own logic
+						if (!entry.target.classList.contains('testimonial-card')) {
+							revealObserver.unobserve(entry.target);
+						}
+					}
+				});
+			}, revealObserverOptions);
+
+			function setupReveals() {
+				// Don't run reveal setup on home page to keep it as is
+				if (window.location.pathname === '/NickSammonsReality/' || window.location.pathname === '/NickSammonsReality') {
+					return;
+				}
+				
+				const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+				revealElements.forEach(el => revealObserver.observe(el));
+			}
+
+			// Run on load and after view transitions if applicable
+			window.addEventListener('load', setupReveals);
+			document.addEventListener('astro:page-load', setupReveals);
 		</script>
 		
 		<footer class="bg-navy-950 text-stone-400 py-12 md:py-20 px-6 lg:px-12 border-t border-gold-400/20">
