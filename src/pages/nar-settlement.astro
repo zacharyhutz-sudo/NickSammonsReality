@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Understanding the NAR Settlement | Nick Sammons Realtor">
 	<main class="relative z-0">
 		<!-- Header with Hero Background -->
-		<section class="relative py-24 md:py-48 px-6 lg:px-12 flex items-center justify-center overflow-hidden">
+		<section class="relative py-24 md:py-48 px-6 lg:px-12 flex items-center justify-center overflow-hidden reveal">
 			<div class="absolute inset-0 z-0">
 				<img 
 					src="/NickSammonsReality/assets/listings/beechwood-master.jpg" 
@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
 		<section class="py-12 md:py-32 bg-white relative overflow-hidden">
 			<div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 items-start">
 				
-				<div class="lg:col-span-7 space-y-20">
+				<div class="lg:col-span-7 space-y-20 reveal-stagger">
 					<!-- Key Change 1 -->
 					<div class="flex flex-row gap-6 md:gap-8 items-start">
 						<div class="text-gold-400 font-serif text-3xl md:text-4xl italic shrink-0">01</div>
@@ -53,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 
 				<!-- Side Mosaic / Accent -->
-				<div class="lg:col-span-5 space-y-8">
+				<div class="lg:col-span-5 space-y-8 reveal" style="transition-delay: 0.3s;">
 					<div class="relative group overflow-hidden shadow-2xl">
 						<img src="/NickSammonsReality/assets/listings/shady-lr.jpg" alt="Living Area" class="w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700" />
 						<div class="absolute inset-0 border-[20px] border-white/10 pointer-events-none"></div>
@@ -68,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 
 		<!-- Why it matters -->
-		<section class="relative py-24 md:py-40 bg-navy-900 overflow-hidden">
+		<section class="relative py-24 md:py-40 bg-navy-900 overflow-hidden reveal">
 			<div class="absolute right-0 top-0 w-1/3 h-full opacity-20 grayscale pointer-events-none">
 				<img src="/NickSammonsReality/assets/listings/shady-b.jpg" alt="" class="h-full w-full object-cover" />
 			</div>
@@ -80,10 +80,12 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
-				<!-- FAQ / Final Note -->
+        <!-- FAQ Section -->
+        <section class="py-12 md:py-32">
+            <div class="max-w-6xl mx-auto px-4">
 				<div class="space-y-12 pt-10">
-					<h2 class="text-3xl md:text-4xl font-serif tracking-tight text-navy-900 text-center">Frequently Asked Questions</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+					<h2 class="text-3xl md:text-4xl font-serif tracking-tight text-navy-900 text-center reveal">Frequently Asked Questions</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 reveal-stagger">
 						<div class="space-y-4 px-4 md:px-0">
 							<h4 class="text-[10px] md:text-xs font-black uppercase tracking-widest text-gold-500">Do I have to pay my agent?</h4>
 							<p class="text-sm md:text-base text-stone-600 leading-relaxed font-light break-words">Agent compensation is negotiable. While many sellers still offer compensation to facilitate the sale, your agreement will outline exactly how I am paid for my expertise and representation if the seller does not cover the full amount.</p>
@@ -94,12 +96,12 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 					</div>
 				</div>
-			</div>
+            </div>
 		</section>
 
 		<!-- My Commitment Section -->
 		<section class="py-20 bg-stone-50">
-			<div class="max-w-4xl mx-auto px-6 text-center space-y-8">
+			<div class="max-w-4xl mx-auto px-6 text-center space-y-8 reveal">
 				<h2 class="text-3xl md:text-5xl font-serif tracking-tight">My Commitment to <span class="italic">You</span></h2>
 				<p class="text-stone-600 leading-relaxed max-w-2xl mx-auto font-light">
 					I take my fiduciary duty to my clients with the utmost seriousness. In this new era of real estate, my focus remains where it has always been: providing world-class marketing, strategic negotiation, and an unmatched level of service for every buyer and seller I represent.
