@@ -171,20 +171,19 @@ import Layout from '../layouts/Layout.astro';
 
       // Store data for submission
       calculationData = {
-        homePrice: '$' + homePrice.toLocaleString(),
-        downPayment: '$' + downPayment.toLocaleString(),
-        interestRate: interestRateRaw + '%',
-        term: loanTermYears + ' Years',
-        monthlyPI: '$' + Math.round(monthlyPI).toLocaleString(),
-        monthlyTax: '$' + Math.round(monthlyTax).toLocaleString(),
-        monthlyInsurance: '$' + Math.round(monthlyInsurance).toLocaleString(),
-        monthlyHoa: '$' + Math.round(monthlyHoa).toLocaleString(),
-        totalMonthly: '$' + Math.round(totalMonthly).toLocaleString()
+        "Home Price": '$' + homePrice.toLocaleString(),
+        "Down Payment": '$' + downPayment.toLocaleString(),
+        "Interest Rate": interestRateRaw + '%',
+        "Term": loanTermYears + ' Years',
+        "Monthly Principal & Interest": '$' + Math.round(monthlyPI).toLocaleString(),
+        "Monthly Property Tax": '$' + Math.round(monthlyTax).toLocaleString(),
+        "Monthly Home Insurance": '$' + Math.round(monthlyInsurance).toLocaleString(),
+        "Monthly HOA Dues": '$' + Math.round(monthlyHoa).toLocaleString(),
+        "Total Monthly Payment": '$' + Math.round(totalMonthly).toLocaleString()
       };
 
-      document.getElementById('monthlyPayment').textContent = calculationData.totalMonthly;
-      document.getElementById('resPrincipal').textContent = calculationData.monthlyPI;
-      document.getElementById('resTaxes').textContent = calculationData.monthlyTaxes; // Note: using direct values for display
+      document.getElementById('monthlyPayment').textContent = calculationData["Total Monthly Payment"];
+      document.getElementById('resPrincipal').textContent = calculationData["Monthly Principal & Interest"];
       document.getElementById('resTaxes').textContent = '$' + Math.round(monthlyTax).toLocaleString();
       document.getElementById('resInsurance').textContent = '$' + Math.round(monthlyInsurance).toLocaleString();
       document.getElementById('resHoa').textContent = '$' + Math.round(monthlyHoa).toLocaleString();
@@ -245,8 +244,8 @@ import Layout from '../layouts/Layout.astro';
                     Accept: "application/json",
                 },
                 body: JSON.stringify({
-                    name: name,
-                    email: email,
+                    "Customer Name": name,
+                    "Customer Email": email,
                     subject: "New Mortgage Calculation - Nick Sammons Realtor",
                     ...calculationData
                 }),
