@@ -25,21 +25,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="h-px bg-stone-200 flex-1"></div>
 			</div>
 			
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 reveal-stagger">
-				<!-- Listing: 88 Old Vineyard Way -->
-				<div class="group">
-					<div class="aspect-[16/10] bg-stone-200 mb-6 overflow-hidden relative">
-						<img src="/assets/88vineyardway_new.jpg" alt="Modern 88 Old Vineyard Way property rental in Cleveland Georgia" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
-						<div class="absolute top-4 left-4 bg-navy-900 text-white px-3 py-1 text-[8px] font-bold uppercase tracking-widest">
-							Active Rental
-						</div>
-					</div>
-					<div class="space-y-2">
-						<h3 class="text-2xl font-serif">88 Old Vineyard Way</h3>
-						<p class="text-[10px] uppercase tracking-widest text-stone-400">Cleveland, Georgia — $1,400/mo</p>
-					</div>
-				</div>
-
+			<div class="grid grid-cols-1 md:grid-cols-1 gap-12 reveal-stagger max-w-4xl">
 				<!-- 97 Eagle Ridge Trail -->
 				<div class="group">
 					<div class="aspect-[16/10] bg-stone-200 mb-6 overflow-hidden relative">
@@ -97,6 +83,18 @@ import Layout from '../layouts/Layout.astro';
 						<h3 class="text-2xl font-serif">0 Victoria Road</h3>
 						<p class="text-[10px] uppercase tracking-widest text-stone-400 italic">Sold December 2024 — $210,000</p>
 						<p class="text-sm text-stone-500 font-light leading-relaxed">Represented Buyer & Seller</p>
+					</div>
+				</div>
+
+				<!-- Property 4 -->
+				<div id="88-old-vineyard" class="group">
+					<div class="aspect-square bg-stone-200 mb-8 overflow-hidden">
+						<img src="/assets/88vineyardway_new.jpg" alt="88 Old Vineyard Way sold by Nick Sammons in Cleveland Georgia" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+					</div>
+					<div class="space-y-3">
+						<h3 class="text-2xl font-serif">88 Old Vineyard Way</h3>
+						<p class="text-[10px] uppercase tracking-widest text-stone-400 italic">Sold</p>
+						<p class="text-sm text-stone-500 font-light leading-relaxed">Cleveland, Georgia</p>
 					</div>
 				</div>
 			</div>
